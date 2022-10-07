@@ -93,19 +93,24 @@ class AppBarData {
             Color(0xff0F5A6B),
         ]);
 
-    return AppBar(
-      flexibleSpace: Container(
-          decoration: BoxDecoration(
-        boxShadow: box,
-        gradient: gradient,
-      )),
-      title: _initTitle(),
-      leading: _initLeading(),
-      centerTitle: true,
-      primary: true,
-      elevation: evelation ??0,
-      actions: actions ?? [],
-      // systemOverlayStyle: systemOverlayStyle ?? SystemUiOverlayStyle(),
+    return PreferredSize(
+      preferredSize: Size.fromHeight(80.0),
+      child: AppBar( 
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(30),
+
+          )
+        ),
+        backgroundColor: BasePKG().color.primaryColor,
+        title: _initTitle(),
+        leading: _initLeading(),
+        centerTitle: true,
+        primary: true,
+        elevation: evelation ??0,
+        actions: actions ?? [],
+        // systemOverlayStyle: systemOverlayStyle ?? SystemUiOverlayStyle(),
+      ),
     );
   }
 
