@@ -1,9 +1,9 @@
 import 'package:cnvsoft/core/base_core/base_page.dart';
 import 'package:cnvsoft/core/base_core/base_search.dart';
 import 'package:cnvsoft/core/extend/search/search_provider.dart';
-import 'package:cnvsoft/special/base_citenco/package/package.dart';
-import 'package:cnvsoft/special/base_citenco/package/trans.dart';
-import 'package:cnvsoft/special/base_citenco/modify/package.dart';
+import 'package:cnvsoft/base_citenco/package/package.dart';
+import 'package:cnvsoft/base_citenco/package/trans.dart';
+import 'package:cnvsoft/base_citenco/modify/package.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';

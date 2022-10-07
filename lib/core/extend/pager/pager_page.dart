@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:cnvsoft/core/base_core/base_page.dart';
-import 'package:cnvsoft/special/base_citenco/package/package.dart';
-import 'package:cnvsoft/special/base_citenco/modify/package.dart';
+import 'package:cnvsoft/base_citenco/package/package.dart';
+import 'package:cnvsoft/base_citenco/modify/package.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

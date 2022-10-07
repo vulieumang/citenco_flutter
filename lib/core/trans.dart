@@ -1,4 +1,4 @@
-import 'package:cnvsoft/special/base_citenco/package/translation.dart';
+import 'package:cnvsoft/base_citenco/package/translation.dart';
 
 class CoreTrans extends BaseTranslation {
   static CoreTrans? _internal;

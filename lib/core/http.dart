@@ -6,12 +6,12 @@ import 'package:cnvsoft/core/dio_logger.dart';
 import 'package:cnvsoft/core/package.dart';
 import 'package:cnvsoft/core/storage.dart';
 import 'package:cnvsoft/global.dart';
-import 'package:cnvsoft/special/base_citenco/dialog/lock_app_dialog.dart';
-import 'package:cnvsoft/special/base_citenco/dialog/message_dialog.dart';
-import 'package:cnvsoft/special/base_citenco/mix/profile_mix.dart';
-import 'package:cnvsoft/special/base_citenco/package/package.dart';
-import 'package:cnvsoft/special/base_citenco/package/scope.dart';
-import 'package:cnvsoft/special/base_citenco/package/trans.dart';
+import 'package:cnvsoft/base_citenco/dialog/lock_app_dialog.dart';
+import 'package:cnvsoft/base_citenco/dialog/message_dialog.dart';
+import 'package:cnvsoft/base_citenco/mix/profile_mix.dart';
+import 'package:cnvsoft/base_citenco/package/package.dart';
+import 'package:cnvsoft/base_citenco/package/scope.dart';
+import 'package:cnvsoft/base_citenco/package/trans.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
@@ -201,7 +201,7 @@ class Http with DataMix {
   Map<String, dynamic> _getErrorJson(dynamic error) {
     if (error is DioError) {
       return {
-        "basehoip Url": stringOf(() => error.requestOptions.baseUrl),
+        "base Url": stringOf(() => error.requestOptions.baseUrl),
         "path": stringOf(() => error.requestOptions.uri.path),
         "message": stringOf(() => error.message),
         "method": stringOf(() => error.requestOptions.method),
@@ -558,10 +558,7 @@ class Http with DataMix {
       result = parse<T>(_json);
 
       if (statusCode == HttpStatus.forbidden) {
-        if (!PackageManager().hasLockApp && BaseScope().ishasLockApp) {
-          PackageManager().setHasLockApp(true);
-          await LockAppDialog.show(state!, response: _json);
-        }
+        
       } else if (result is BaseModel) {
         result.statusCode = statusCode;
         result.redirectLink = redirectLink;
@@ -605,8 +602,7 @@ class Http with DataMix {
         }
         if (statusCode == HttpStatus.unauthorized) {
           if (!PackageManager().requiredLogout &&
-              !MyProfile().isGuest &&
-              !BaseScope().forceUnAuth) {
+              !MyProfile().isGuest  ) {
             PackageManager().requiredLogout = true;
             if(statusCode != 401)
             await MessageDialog.showErrors(state!, result.error);

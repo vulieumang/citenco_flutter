@@ -6,7 +6,7 @@ import 'package:cnvsoft/core/connection.dart';
 import 'package:cnvsoft/core/log.dart';
 import 'package:cnvsoft/core/translation.dart';
 import 'package:cnvsoft/global.dart';
-import 'package:cnvsoft/special/base_citenco/package/translation.dart';
+import 'package:cnvsoft/base_citenco/package/translation.dart';
 import 'package:dio/dio.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:firebase_core/firebase_core.dart';

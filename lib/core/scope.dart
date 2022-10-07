@@ -6,9 +6,8 @@ import 'package:cnvsoft/core/base_core/data_mix.dart';
 import 'package:cnvsoft/core/check_version.dart';
 import 'package:cnvsoft/core/log.dart';
 import 'package:cnvsoft/core/storage.dart';
-import 'package:cnvsoft/special/base_citenco/modify/scope.dart';
-import 'package:flutter/material.dart';
-import 'package:new_version/new_version.dart';
+import 'package:cnvsoft/base_citenco/modify/scope.dart';
+import 'package:flutter/material.dart'; 
 
 import 'package.dart';
 

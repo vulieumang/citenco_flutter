@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:cnvsoft/core/log.dart';
-import 'package:cnvsoft/special/base_citenco/util.dart';
+import 'package:cnvsoft/base_citenco/util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'multiasync.dart';

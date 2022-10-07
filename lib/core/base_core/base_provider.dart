@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:cnvsoft/core/bus.dart';
 import 'package:cnvsoft/global.dart';
-import 'package:cnvsoft/special/base_citenco/dialog/message_dialog.dart';
-import 'package:cnvsoft/special/base_citenco/package/package.dart';
-import 'package:cnvsoft/special/base_citenco/package/scope.dart';
-import 'package:cnvsoft/special/base_citenco/modify/package.dart';
-import 'package:cnvsoft/special/base_citenco/package/trans.dart';
+import 'package:cnvsoft/base_citenco/dialog/message_dialog.dart';
+import 'package:cnvsoft/base_citenco/package/package.dart';
+import 'package:cnvsoft/base_citenco/package/scope.dart';
+import 'package:cnvsoft/base_citenco/modify/package.dart';
+import 'package:cnvsoft/base_citenco/package/trans.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -201,9 +201,7 @@ abstract class BaseProvider<T extends State> {
   }
 
   void initNetwork() async {
-    if (BaseScope().allowNetwork) {
-      _initConnectivity();
-    }
+    _initConnectivity(); 
   }
 
   void disposeNetwork() {

@@ -1,8 +1,8 @@
 import 'package:cnvsoft/core/storage.dart';
-import 'package:cnvsoft/special/base_citenco/mix/profile_mix.dart';
-import 'package:cnvsoft/special/base_citenco/package/package.dart';
-import 'package:cnvsoft/special/base_citenco/package/scope.dart';
-import 'package:cnvsoft/special/base_citenco/util.dart';
+import 'package:cnvsoft/base_citenco/mix/profile_mix.dart';
+import 'package:cnvsoft/base_citenco/package/package.dart';
+import 'package:cnvsoft/base_citenco/package/scope.dart';
+import 'package:cnvsoft/base_citenco/util.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:pretty_json/pretty_json.dart';

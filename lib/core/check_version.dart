@@ -9,7 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart' show parse;
 import 'package:http/http.dart' as http;
-import 'package:package_info_plus/package_info_plus.dart';
+import 'package:package_info/package_info.dart'; 
 import 'package:url_launcher/url_launcher.dart';
 
 /// Information about the app's current version, and the most recent version

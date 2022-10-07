@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:cnvsoft/core/base_core/base_notifier.dart';
 import 'package:cnvsoft/core/base_core/base_provider.dart';
-import 'package:cnvsoft/special/base_citenco/mix/profile_mix.dart';
+import 'package:cnvsoft/base_citenco/mix/profile_mix.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,8 +1,8 @@
-import 'package:cnvsoft/special/base_citenco/package/package.dart';
-import 'package:cnvsoft/special/base_citenco/package/scope.dart';
-import 'package:cnvsoft/special/base_citenco/package/trans.dart';
-import 'package:cnvsoft/special/base_citenco/util.dart';
-import 'package:cnvsoft/special/base_citenco/modify/package.dart';
+import 'package:cnvsoft/base_citenco/package/package.dart';
+import 'package:cnvsoft/base_citenco/package/scope.dart';
+import 'package:cnvsoft/base_citenco/package/trans.dart';
+import 'package:cnvsoft/base_citenco/util.dart';
+import 'package:cnvsoft/base_citenco/modify/package.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -103,7 +103,7 @@ class AppBarData {
       leading: _initLeading(),
       centerTitle: true,
       primary: true,
-      elevation: evelation ?? BaseScope().elevationAppbar,
+      elevation: evelation ??0,
       actions: actions ?? [],
       // systemOverlayStyle: systemOverlayStyle ?? SystemUiOverlayStyle(),
     );

@@ -1,20 +1,20 @@
-import 'package:cnvsoft/special/base_citenco/modify/package.dart';
-import 'package:cnvsoft/special/base_citenco/package/package.dart';
-import 'package:cnvsoft/special/base_citenco/page/blank/blank_page.dart';
+import 'package:cnvsoft/base_citenco/modify/package.dart';
+import 'package:cnvsoft/base_citenco/package/package.dart';
+import 'package:cnvsoft/base_citenco/page/blank/blank_page.dart';
 import 'package:flutter/material.dart';
 
 import 'core/http.dart';
 import 'core/package.dart';
 import 'core/translation.dart';
-import 'special/base_citenco/package/trans.dart';
+import 'base_citenco/package/trans.dart';
 
 class Config {
-  static String title = "Hà Shop Pro";
+  static String title = "Shop ";
 
   //config
   static void initial() {
     PackageManager.user(
-      sku: "vn.cnv.cnvloyalty.hoip",
+      sku: "vn",
       defaultPage: BlankPage(),
       packages: <Package>[
         ModifyPKG(),
@@ -31,11 +31,8 @@ class Config {
 
   static void config() {
     BasePKG().env = ENV(
-        env:
-            // "staging",
-            "production",
-        accountDomainName:
-            "hashop-pro"
+        env:  "production",
+        accountDomainName: "shop-pro"
         );
   }
 }

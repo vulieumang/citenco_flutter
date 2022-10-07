@@ -1,9 +1,9 @@
 import 'package:cnvsoft/core/base_core/base_view.dart';
 import 'package:cnvsoft/core/view/loading_more.dart';
-import 'package:cnvsoft/special/base_citenco/mix/profile_mix.dart';
-import 'package:cnvsoft/special/base_citenco/package/package.dart';
-import 'package:cnvsoft/special/base_citenco/package/trans.dart';
-import 'package:cnvsoft/special/base_citenco/modify/package.dart';
+import 'package:cnvsoft/base_citenco/mix/profile_mix.dart';
+import 'package:cnvsoft/base_citenco/package/package.dart';
+import 'package:cnvsoft/base_citenco/package/trans.dart';
+import 'package:cnvsoft/base_citenco/modify/package.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
