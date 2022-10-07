@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="33px" viewBox="0 0 50 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>barcodes</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0 0 50 0 50 32.99175 0 32.99175"></polygon>
+    </defs>
+    <g id="Thẻ-Bảo-Hành" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Warranty" transform="translate(-37.000000, -188.000000)">
+            <g id="part-1" transform="translate(20.000000, 171.000000)">
+                <g id="Group-3" transform="translate(17.000000, 14.000000)">
+                    <g id="Group">
+                        <g id="Group-6">
+                            <g id="barcodes" transform="translate(0.000000, 3.000000)">
+                                <g id="Group-3">
+                                    <mask id="mask-2" fill="white">
+                                        <use xlink:href="#path-1"></use>
+                                    </mask>
+                                    <g id="Clip-2"></g>
+                                    <path d="M49.1666667,33 L0.833333333,33 C0.6125,33 0.400416667,32.9129625 0.244166667,32.758275 C0.0879166667,32.6035875 0,32.393625 0,32.175 L0,0.825 C0,0.606375 0.0879166667,0.3964125 0.244166667,0.241725 C0.400416667,0.0870375 0.6125,0 0.833333333,0 L49.1666667,0 C49.3875,0 49.5995833,0.0870375 49.7558333,0.241725 C49.9120833,0.3964125 50,0.606375 50,0.825 L50,32.175 C50,32.393625 49.9120833,32.6035875 49.7558333,32.758275 C49.5995833,32.9129625 49.3875,33 49.1666667,33 Z M1.66666667,31.35 L48.3333333,31.35 L48.3333333,1.65 L1.66666667,1.65 L1.66666667,31.35 Z" id="Fill-1" fill="#000000" mask="url(#mask-2)"></path>
+                                </g>
+                                <polygon id="Fill-4" fill="#000000" points="7 28 9 28 9 17 7 17"></polygon>
+                                <polygon id="Fill-5" fill="#000000" points="10 23 12 23 12 16 10 16"></polygon>
+                                <polygon id="Fill-6" fill="#000000" points="10 12 12 12 12 5 10 5"></polygon>
+                                <polygon id="Fill-7" fill="#000000" points="14 12 16 12 16 5 14 5"></polygon>
+                                <polygon id="Fill-8" fill="#000000" points="17 12 19 12 19 5 17 5"></polygon>
+                                <polygon id="Fill-9" fill="#000000" points="21 12 23 12 23 5 21 5"></polygon>
+                                <polygon id="Fill-10" fill="#000000" points="24 12 26 12 26 5 24 5"></polygon>
+                                <polygon id="Fill-11" fill="#000000" points="27 12 29 12 29 5 27 5"></polygon>
+                                <polygon id="Fill-12" fill="#000000" points="31 12 33 12 33 5 31 5"></polygon>
+                                <polygon id="Fill-13" fill="#000000" points="34 12 36 12 36 5 34 5"></polygon>
+                                <polygon id="Fill-14" fill="#000000" points="38 12 40 12 40 5 38 5"></polygon>
+                                <polygon id="Fill-15" fill="#000000" points="41 12 43 12 43 5 41 5"></polygon>
+                                <polygon id="Fill-16" fill="#000000" points="7 12 9 12 9 5 7 5"></polygon>
+                                <polygon id="Fill-17" fill="#000000" points="10 28 12 28 12 26 10 26"></polygon>
+                                <polygon id="Fill-18" fill="#000000" points="14 23 16 23 16 16 14 16"></polygon>
+                                <polygon id="Fill-19" fill="#000000" points="14 28 16 28 16 26 14 26"></polygon>
+                                <polygon id="Fill-20" fill="#000000" points="17 23 19 23 19 16 17 16"></polygon>
+                                <polygon id="Fill-21" fill="#000000" points="17 28 19 28 19 26 17 26"></polygon>
+                                <polygon id="Fill-22" fill="#000000" points="21 23 23 23 23 16 21 16"></polygon>
+                                <polygon id="Fill-23" fill="#000000" points="21 28 23 28 23 26 21 26"></polygon>
+                                <polygon id="Fill-24" fill="#000000" points="24 28 26 28 26 17 24 17"></polygon>
+                                <polygon id="Fill-25" fill="#000000" points="27 23 29 23 29 16 27 16"></polygon>
+                                <polygon id="Fill-26" fill="#000000" points="27 28 29 28 29 26 27 26"></polygon>
+                                <polygon id="Fill-27" fill="#000000" points="31 23 33 23 33 16 31 16"></polygon>
+                                <polygon id="Fill-28" fill="#000000" points="31 28 33 28 33 26 31 26"></polygon>
+                                <polygon id="Fill-29" fill="#000000" points="34 23 36 23 36 16 34 16"></polygon>
+                                <polygon id="Fill-30" fill="#000000" points="34 28 36 28 36 26 34 26"></polygon>
+                                <polygon id="Fill-31" fill="#000000" points="38 23 40 23 40 16 38 16"></polygon>
+                                <polygon id="Fill-32" fill="#000000" points="38 28 40 28 40 26 38 26"></polygon>
+                                <polygon id="Fill-33" fill="#000000" points="44 28 46 28 46 26 44 26"></polygon>
+                                <polygon id="Fill-34" fill="#000000" points="4 28 6 28 6 26 4 26"></polygon>
+                                <polygon id="Fill-35" fill="#000000" points="41 28 43 28 43 17 41 17"></polygon>
+                                <polygon id="Fill-36" fill="#000000" points="5 15 46 15 46 13 5 13"></polygon>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
