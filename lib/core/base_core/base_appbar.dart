@@ -12,6 +12,7 @@ class AppBarData {
   String? text;
   final Widget? title;
   final bool? backArrow;
+  final Widget? flexibleSpace;
   final Widget? leading;
   final Function()? onBack;
   final List<Widget>? actions;
@@ -19,6 +20,7 @@ class AppBarData {
   final Color? color;
   final double? evelation;
   final SystemUiOverlayStyle? systemOverlayStyle;
+  double radius; 
 
   AppBarData(this.context,
       {this.title,
@@ -30,6 +32,8 @@ class AppBarData {
       this.leading,
       this.onBack,
       this.systemOverlayStyle,
+      this.flexibleSpace,
+      this.radius = 30,
       this.evelation})
       : text = text ?? "";
 
@@ -42,6 +46,7 @@ class AppBarData {
       Function()? onBack,
       List<Widget>? actions,
       SystemUiOverlayStyle? systemOverlayStyle,
+      double? radius = 30,
       double? evelation}) {
     return AppBarData(context,
         backgroundColor: backgroundColor,
@@ -53,6 +58,7 @@ class AppBarData {
         actions: actions,
         onBack: onBack,
         evelation: evelation,
+        radius: radius!,
         systemOverlayStyle: systemOverlayStyle
       );
   }
@@ -92,19 +98,18 @@ class AppBarData {
             Color(0xff031126),
             Color(0xff0F5A6B),
         ]);
-
     return PreferredSize(
-      preferredSize: Size.fromHeight(80.0),
+      preferredSize: Size.fromHeight(radius == 0 ?50 :80.0),
       child: AppBar( 
+        flexibleSpace:flexibleSpace??Container(),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(30),
-
+            bottom: Radius.circular(radius), 
           )
         ),
         backgroundColor: BasePKG().color.primaryColor,
         title: _initTitle(),
-        leading: _initLeading(),
+        leading: _initLeading(), 
         centerTitle: true,
         primary: true,
         elevation: evelation ??0,
@@ -146,7 +151,7 @@ class BottonBack extends StatelessWidget {
         children: [
           Container(
             child: SvgPicture.asset(
-              "lib/special/base_citenco/asset/image/ic_arrow_left.svg",
+              "lib/base_citenco/asset/image/ic_arrow_left.svg",
               height: 24,
               width: 24,
               color: BasePKG().color.iconColorPr,

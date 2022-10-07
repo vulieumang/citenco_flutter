@@ -1,4 +1,6 @@
 import 'package:cnvsoft/base_citenco/page/home/home_page.dart';
+import 'package:cnvsoft/base_citenco/page/scan_car/scan_car_page.dart';
+import 'package:cnvsoft/base_citenco/page/temporary_car/temporary_car_page.dart';
 import 'package:cnvsoft/core/bus.dart';
 import 'package:cnvsoft/core/http.dart';
 import 'package:cnvsoft/core/package.dart';
@@ -35,6 +37,8 @@ class ModifyPKG extends BasePackage {
     return {
       // "dash_board": (arg) => DashBoardPage(), 
       "dash_board": (arg) => HomePage(), 
+      // "dash_board": (arg) => ScanCarPage(), 
+      // "dash_board": (arg) => TemporaryCarPage(), 
     };
   }
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="72px" height="72px" viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>Button Photo</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Admin-Spa" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Khách-Hàng-Chụp-ảnh-trước" transform="translate(-152.000000, -714.000000)" fill="#FFFFFF">
+            <g id="System/Camera/Button-Photo" transform="translate(152.000000, 714.000000)">
+                <path d="M36,0 C55.882251,0 72,16.117749 72,36 C72,55.882251 55.882251,72 36,72 C16.117749,72 0,55.882251 0,36 C0,16.117749 16.117749,0 36,0 Z M36,6 C19.4314575,6 6,19.4314575 6,36 C6,52.5685425 19.4314575,66 36,66 C52.5685425,66 66,52.5685425 66,36 C66,19.4314575 52.5685425,6 36,6 Z M36,8.33333333 C51.2798781,8.33333333 63.6666667,20.7201219 63.6666667,36 C63.6666667,51.2798781 51.2798781,63.6666667 36,63.6666667 C20.7201219,63.6666667 8.33333333,51.2798781 8.33333333,36 C8.33333333,20.7201219 20.7201219,8.33333333 36,8.33333333 Z" id="Button-Photo"></path>
+            </g>
+        </g>
+    </g>
+</svg>

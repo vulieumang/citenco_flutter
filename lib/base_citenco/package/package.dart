@@ -1,4 +1,6 @@
 import 'dart:async'; 
+import 'package:cnvsoft/base_citenco/page/temporary_car/custom_camera/camera.dart';
+import 'package:cnvsoft/base_citenco/page/temporary_car/custom_camera/image_reviews.dart';
 import 'package:cnvsoft/core/base_core/base_model.dart';
 import 'package:cnvsoft/core/base_core/data_mix.dart';
 import 'package:cnvsoft/core/bus.dart'; 
@@ -91,6 +93,12 @@ class BasePKG extends BasePackage {
       "error": (arg) => ErrorPage(error: arg["error"]),
       "error_list": (arg) => ErrorListPage(),  
       "web2": (arg) => FeedBackWebPage(urlView: dataOf(() => arg["url"])),  
+      "camera_screen_takeimage": (arg) => CameraScreen.takeimage(
+          titleAppbar: dataOf(() => arg["title_appbar"], null),
+          accessGallery: boolOf(() => arg["access_gallery"]),
+        ),
+      "gallery_capture": (arg) => ImageReviews(
+          imagePath: arg['imagePath'], type: arg['type'], color: arg["color"]),
     };
   }
 
