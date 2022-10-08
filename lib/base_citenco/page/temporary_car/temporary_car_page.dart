@@ -25,39 +25,20 @@ class TemporaryCarPage extends StatefulWidget {
   State<StatefulWidget> createState() => TemporaryCarPageState();
 }
 
-class TemporaryCarPageState extends BasePage<TemporaryCarPage, TemporaryCarProvider>
-    with DataMix {
+class TemporaryCarPageState
+    extends BasePage<TemporaryCarPage, TemporaryCarProvider> with DataMix {
   @override
   void initState() {
-    // appBar = AppBarData(
-    //   context,
-    //   flexibleSpace: Container(
-    //     child: Column(
-    //       mainAxisAlignment: MainAxisAlignment.center,
-    //       crossAxisAlignment: CrossAxisAlignment.center,
-    //       children: [
-    //         Row(
-    //           crossAxisAlignment: CrossAxisAlignment.center,
-    //             mainAxisAlignment: MainAxisAlignment.center,
-    //           children: [
-    //             Expanded(
-    //               child: Container(
-    //                 child: Text(
-    //                   "CÔNG TY TNHH MTV MÔI TRƯỜNG ĐÔ THỊ TPHCM",
-    //                   style: BasePKG().text!.normalNormal().copyWith(color: Colors.white),
-    //                   maxLines: 2,
-    //                   textAlign: TextAlign.center,
-    //                 ),
-    //               ),
-    //             ),
-    //           ],
-    //         ), 
-    //       ],
-    //     ),
-    //   )
-    // );
+    appBar = AppBarData(context,
+        height: 50,
+        title: Text(
+          "Đăng ký xe vãng lai",
+          style: BasePKG().text!.normalNormal().copyWith(color: Colors.white),
+          maxLines: 2,
+          textAlign: TextAlign.center,
+        ));
     super.initState();
-  } 
+  }
 
   @override
   TemporaryCarProvider initProvider() => TemporaryCarProvider(this);
@@ -66,38 +47,42 @@ class TemporaryCarPageState extends BasePage<TemporaryCarPage, TemporaryCarProvi
     return Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      child: Column( 
-        children: [  
+      child: Column(
+        children: [
           Container(
-            padding: EdgeInsets.symmetric( horizontal: 20,vertical: 30),
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
                   "Đăng ký xe vãng lai",
-                  style: BasePKG().text!.largeUpperBold().copyWith(color: Color(0xff0089FF)),
+                  style: BasePKG()
+                      .text!
+                      .largeUpperBold()
+                      .copyWith(color: Color(0xff0089FF)),
                 ),
               ],
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric( horizontal: 20),
-            child: GestureDetector(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  GestureDetector( 
-                    child: Container(
-                      child: Text(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: GestureDetector(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    GestureDetector(
+                      child: Container(
+                          child: Text(
                         "Biển số xe",
-                        style: BasePKG().text!.largeUpperBold().copyWith(color: Color(0xff023C6D)),
-                      )
-                    ),
-                  )
-                ],
-              ),
-            )
-          ),
+                        style: BasePKG()
+                            .text!
+                            .largeUpperBold()
+                            .copyWith(color: Color(0xff023C6D)),
+                      )),
+                    )
+                  ],
+                ),
+              )),
           Container(
             padding: EdgeInsets.symmetric(vertical: 16),
             child: TextFieldCustom(
@@ -106,23 +91,24 @@ class TemporaryCarPageState extends BasePage<TemporaryCarPage, TemporaryCarProvi
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric( horizontal: 20),
-            child: GestureDetector(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  GestureDetector( 
-                    child: Container(
-                      child: Text(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: GestureDetector(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    GestureDetector(
+                      child: Container(
+                          child: Text(
                         "Khối lượng (KG)",
-                        style: BasePKG().text!.largeUpperBold().copyWith(color: Color(0xff023C6D)),
-                      )
-                    ),
-                  )
-                ],
-              ),
-            )
-          ),
+                        style: BasePKG()
+                            .text!
+                            .largeUpperBold()
+                            .copyWith(color: Color(0xff023C6D)),
+                      )),
+                    )
+                  ],
+                ),
+              )),
           Container(
             padding: EdgeInsets.symmetric(vertical: 16),
             child: TextFieldCustom(
@@ -131,60 +117,62 @@ class TemporaryCarPageState extends BasePage<TemporaryCarPage, TemporaryCarProvi
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric( horizontal: 20),
-            child: GestureDetector(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  GestureDetector( 
-                    child: Container(
-                      child: Text(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: GestureDetector(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    GestureDetector(
+                      child: Container(
+                          child: Text(
                         "Hình ảnh",
-                        style: BasePKG().text!.largeUpperBold().copyWith(color: Color(0xff023C6D)),
-                      )
-                    ),
-                  )
-                ],
-              ),
-            )
+                        style: BasePKG()
+                            .text!
+                            .largeUpperBold()
+                            .copyWith(color: Color(0xff023C6D)),
+                      )),
+                    )
+                  ],
+                ),
+              )),
+          SizedBox(
+            height: 20,
           ),
-          SizedBox(height: 20,),
           Padding(
-            padding: BasePKG().symmetric(horizontal: 20),
-            child: Container( 
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(3),
-                border: Border.all(width: 1,color: Color(0xff539EF8))
-              ),
-              padding: EdgeInsets.symmetric(horizontal: 16,vertical: 8),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                _addImages(),
-              ]),
-            )),
+              padding: BasePKG().symmetric(horizontal: 20),
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(3),
+                    border: Border.all(width: 1, color: Color(0xff539EF8))),
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      _addImages(),
+                    ]),
+              )),
           SizedBox(
             height: 30,
           ),
           Container(
             width: 200,
             decoration: BoxDecoration(
-              color: BasePKG().color.primaryColor,
-              borderRadius: BorderRadius.circular(50)
-            ),
+                color: BasePKG().color.primaryColor,
+                borderRadius: BorderRadius.circular(50)),
             alignment: Alignment.center,
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 5),
-              child: Text(
-                "Ghi lại",
-                style: BasePKG().text!.captionBold().copyWith(color: Colors.white)
-              ),
+              child: Text("Ghi lại",
+                  style: BasePKG()
+                      .text!
+                      .captionBold()
+                      .copyWith(color: Colors.white)),
             ),
           )
         ],
       ),
     );
-  } 
+  }
 
   Widget _addImages() {
     return Consumer<ImagesReviewNotifier>(builder: (ctx, images, _) {
@@ -193,10 +181,7 @@ class TemporaryCarPageState extends BasePage<TemporaryCarPage, TemporaryCarProvi
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-             Visibility(
-              visible: images.value!.length < 0,
-              child: _camera(5)
-            )
+              Visibility(visible: images.value!.length == 0, child: _camera(5))
             ],
           ),
           Visibility(
@@ -205,7 +190,7 @@ class TemporaryCarPageState extends BasePage<TemporaryCarPage, TemporaryCarProvi
                 children: [
                   SizedBox(height: 12),
                   InkWell(
-                    onTap: () => provider.onImagePressed(images.value,context),
+                    onTap: () => provider.onImagePressed(images.value, context),
                     child: Row(
                       children: [
                         Container(
@@ -221,27 +206,20 @@ class TemporaryCarPageState extends BasePage<TemporaryCarPage, TemporaryCarProvi
     });
   }
 
-
   Widget _imagesPicker(List<ImageUploaded>? images) {
     return Wrap(
       alignment: WrapAlignment.start,
       runSpacing: BasePKG().convert(16),
       spacing: BasePKG().convert(16),
       children: List.generate(BasePKG().listOf(() => images).length,
-          (index) =>  
-          _image(BasePKG().dataOf(() => images?[index]), index))
-        ..addAll(
-          [
-
-          (BasePKG().listOf(() => images).length <5  )
-              ? _camera(
-                  5 - BasePKG().listOf(() => images).length)
+          (index) => _image(BasePKG().dataOf(() => images?[index]), index))
+        ..addAll([
+          (BasePKG().listOf(() => images).length < 5)
+              ? _camera(5 - BasePKG().listOf(() => images).length)
               : SizedBox()
-        ]
-      ),
+        ]),
     );
   }
-
 
   Widget _image(ImageUploaded? imageUploaded, int index) {
     double size = 72.0;
@@ -290,7 +268,7 @@ class TemporaryCarPageState extends BasePage<TemporaryCarPage, TemporaryCarProvi
   }
 
   Widget _buildRemoveBtn(int index) {
-    return Visibility( 
+    return Visibility(
       child: Positioned(
         top: -5,
         right: -5,
@@ -313,7 +291,7 @@ class TemporaryCarPageState extends BasePage<TemporaryCarPage, TemporaryCarProvi
       ),
     );
   }
-  
+
   Widget _imageNetwork(String image, double size, int index, double radius) {
     return FadeInImageView.fromSize(
       image,

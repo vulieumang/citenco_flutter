@@ -19,8 +19,9 @@ class AppBarData {
   Color? backgroundColor;
   final Color? color;
   final double? evelation;
+  final double? height;
   final SystemUiOverlayStyle? systemOverlayStyle;
-  double radius; 
+  double radius;
 
   AppBarData(this.context,
       {this.title,
@@ -34,6 +35,7 @@ class AppBarData {
       this.systemOverlayStyle,
       this.flexibleSpace,
       this.radius = 30,
+      this.height = 80,
       this.evelation})
       : text = text ?? "";
 
@@ -59,8 +61,7 @@ class AppBarData {
         onBack: onBack,
         evelation: evelation,
         radius: radius!,
-        systemOverlayStyle: systemOverlayStyle
-      );
+        systemOverlayStyle: systemOverlayStyle);
   }
 
   PreferredSizeWidget netWork() {
@@ -95,24 +96,23 @@ class AppBarData {
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
         colors: [
-            Color(0xff031126),
-            Color(0xff0F5A6B),
+          Color(0xff031126),
+          Color(0xff0F5A6B),
         ]);
     return PreferredSize(
-      preferredSize: Size.fromHeight(radius == 0 ?50 :80.0),
-      child: AppBar( 
-        flexibleSpace:flexibleSpace??Container(),
+      preferredSize: Size.fromHeight(radius == 0 ? 50 : height ?? 80.0),
+      child: AppBar(
+        flexibleSpace: flexibleSpace ?? Container(),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(radius), 
-          )
-        ),
+            borderRadius: BorderRadius.vertical(
+          bottom: Radius.circular(radius),
+        )),
         backgroundColor: BasePKG().color.primaryColor,
         title: _initTitle(),
-        leading: _initLeading(), 
+        leading: _initLeading(),
         centerTitle: true,
         primary: true,
-        elevation: evelation ??0,
+        elevation: evelation ?? 0,
         actions: actions ?? [],
         // systemOverlayStyle: systemOverlayStyle ?? SystemUiOverlayStyle(),
       ),
@@ -120,14 +120,17 @@ class AppBarData {
   }
 
   Widget _initTitle() {
-    var style = ModifyPKG().text!.appBarTitle().copyWith(color: BasePKG().color.colorTextHeader);
+    var style = ModifyPKG()
+        .text!
+        .appBarTitle()
+        .copyWith(color: BasePKG().color.colorTextHeader);
     if (color != null) style = style.copyWith(color: color);
     return title ?? Text(Utils.upperCaseFirst(text ?? ''), style: style);
   }
 
   Widget _initLeading() {
     return ModalRoute.of(context)?.settings.name! != "dash_board"
-        ? BottonBack(onBack: onBack, context: context) 
+        ? BottonBack(onBack: onBack, context: context)
         : (leading ?? SizedBox());
   }
 }

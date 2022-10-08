@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:cnvsoft/base_citenco/page/scan_car/qr_flutter/qr_flutter_page.dart';
 import 'package:cnvsoft/core/base_core/base_page.dart';
 import 'package:cnvsoft/core/base_core/data_mix.dart';
 import 'package:cnvsoft/base_citenco/package/package.dart';
@@ -7,6 +8,7 @@ import 'package:cnvsoft/base_citenco/package/scope.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:package_info/package_info.dart';
+import 'package:provider/provider.dart';
 
 import 'scan_car_provider.dart';
 
@@ -20,8 +22,8 @@ class ScanCarPageState extends BasePage<ScanCarPage, ScanCarProvider>
   @override
   void initState() {
     super.initState();
-  } 
-  
+  }
+
   @override
   ScanCarProvider initProvider() => ScanCarProvider(this);
   @override
@@ -31,27 +33,19 @@ class ScanCarPageState extends BasePage<ScanCarPage, ScanCarProvider>
       width: MediaQuery.of(context).size.width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[ 
-          SafeArea(
-            bottom: true,
-            child: Padding(
-              padding: BasePKG().symmetric(vertical: 10),
-              child: Column(
-                children: [
-                  SpinKitThreeBounce(
-                    size: 24,
-                    color: BasePKG().color.primaryColor,
-                  ),
-                ],
-              ),
-            ),
-          ),
+        children: <Widget>[
+          Consumer<OpenScanNotifier>(
+            builder: (context, value, _) {
+              return Expanded(
+                child: QrFlutterPage(
+                    qrFlutterScanType: QrFlutterScanType.DEFAULT,
+                    resumeCamera: value.value,
+                    scanData: (value) => null),
+              );
+            },
+          )
         ],
       ),
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              fit: BoxFit.fill,
-              image: AssetImage("lib/base_citenco/modify/asset/image/splash.jpg"))),
     );
-  } 
+  }
 }

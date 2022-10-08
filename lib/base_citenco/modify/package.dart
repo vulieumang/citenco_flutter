@@ -6,7 +6,7 @@ import 'package:cnvsoft/core/http.dart';
 import 'package:cnvsoft/core/package.dart';
 import 'package:cnvsoft/core/storage.dart';
 import 'package:cnvsoft/base_citenco/package/color_style.dart';
-import 'package:cnvsoft/base_citenco/package/package.dart'; 
+import 'package:cnvsoft/base_citenco/package/package.dart';
 import 'package:cnvsoft/base_citenco/util.dart';
 import 'package:flutter/material.dart';
 
@@ -35,10 +35,8 @@ class ModifyPKG extends BasePackage {
   @override
   Map<String, Function(dynamic arg)> getPages() {
     return {
-      // "dash_board": (arg) => DashBoardPage(), 
-      "dash_board": (arg) => HomePage(), 
-      // "dash_board": (arg) => ScanCarPage(), 
-      // "dash_board": (arg) => TemporaryCarPage(), 
+      // "dash_board": (arg) => DashBoardPage(),
+      "dash_board": (arg) => HomePage(),
     };
   }
 
@@ -87,7 +85,7 @@ class ModifyColor extends ColorStyle {
   Color iconColor = Color(0xff0D2A5C);
   Color accentColor = Color(0xff0D2A5C);
   Color colorHeader = Color(0xff011029);
-  Color colorIconAppBar = Color(0xffffffff); 
+  Color colorIconAppBar = Color(0xffffffff);
 
   Color darkPrimaryColor = Color(0xff000000);
   Color hightLight = Color(0xfffffff);
