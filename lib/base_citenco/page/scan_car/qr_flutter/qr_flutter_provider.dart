@@ -124,6 +124,7 @@ class QrFlutterProvider extends BaseProvider<QrFlutterPageState> {
 
   onQRViewCreated(QRViewController qrViewController) {
     this.qrViewController = qrViewController;
+    qrViewController.scanInvert(true);
     qrViewController.scannedDataStream.listen((scanData) async {
       if (state.widget.scanData != null) {
         state.widget.scanData!(scanData);
