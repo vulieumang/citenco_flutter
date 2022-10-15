@@ -7,40 +7,35 @@ import 'package:cnvsoft/core/base_core/base_provider.dart';
 import 'package:cnvsoft/core/base_core/data_mix.dart';
 import 'package:cnvsoft/core/package.dart';
 import 'package:cnvsoft/base_citenco/dialog/update_version_dialog/update_version_dialog.dart';
-import 'package:cnvsoft/base_citenco/page/home/home_icon.dart'; 
+import 'package:cnvsoft/base_citenco/page/home/home_icon.dart';
 import 'package:cnvsoft/base_citenco/package/package.dart';
 import 'package:cnvsoft/base_citenco/package/scope.dart';
+import 'package:cnvsoft/core/storage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
- 
 
-class HomeProvider extends BaseProvider
-    with DataMix { 
+class HomeProvider extends BaseProvider with DataMix {
   final ScrollController scrollCtrl = ScrollController();
   final GlobalKey<RefreshIndicatorState> refreshIndicator =
       GlobalKey<RefreshIndicatorState>();
   final WidgetContentNotifier _widgetContent = WidgetContentNotifier();
 
-  HomeProvider(State state) : super(state) { 
-  }
-
-
+  HomeProvider(State state) : super(state) {}
 
   @override
   BusProvider<DashboardChangeHome> initBus() =>
-    BusProvider<DashboardChangeHome>.fromPackage(package: BasePKG(), listeners: { 
-    });
+      BusProvider<DashboardChangeHome>.fromPackage(
+          package: BasePKG(), listeners: {});
 
-
-  void navigate(int value) { 
+  void navigate(int value) {
     controllerPage!.jumpToPage(value);
   }
 
-  final GridIconsNotifier _gridIcons = GridIconsNotifier(); 
+  final GridIconsNotifier _gridIcons = GridIconsNotifier();
 
   PageController? controllerPage = PageController();
 
-  List<HomeIcon> initGridIconList() => [ ];
+  List<HomeIcon> initGridIconList() => [];
 
   @override
   void onReady(callback) async {
@@ -51,6 +46,11 @@ class HomeProvider extends BaseProvider
     // _checkVersion();
   }
 
+  logout() {
+    StorageCNV().clearSession();
+    Navigator.pushNamedAndRemoveUntil(context!, "login_page", (route) => false);
+  }
+
   _checkVersion() {
     PackageManager().checkScopeInfo(state, onShowUpdate: () async {
       await UpdateVersionDialog.show(state);
@@ -58,12 +58,9 @@ class HomeProvider extends BaseProvider
   }
 
   @override
-  List<BaseNotifier> initNotifiers() =>
-      [  _widgetContent, _gridIcons];
+  List<BaseNotifier> initNotifiers() => [_widgetContent, _gridIcons];
 
-
-  Future<void> onInitPage() async {  
-  }
+  Future<void> onInitPage() async {}
 
   void showDrawer() {
     openEndDrawer();
@@ -71,13 +68,12 @@ class HomeProvider extends BaseProvider
 
   Future<void> onRefresh() async {
     // mixProfile(state);
-    showLazyLoad(); 
+    showLazyLoad();
     _loadPreferences();
     hideLazyLoad(second: 1000);
   }
 
-  Future<void> _loadPreferences() async { 
-  }
+  Future<void> _loadPreferences() async {}
 }
 
 class WidgetContentNotifier extends BaseNotifier<List> {

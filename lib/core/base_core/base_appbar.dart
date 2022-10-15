@@ -129,7 +129,8 @@ class AppBarData {
   }
 
   Widget _initLeading() {
-    return ModalRoute.of(context)?.settings.name! != "dash_board"
+    return ModalRoute.of(context)?.settings.name! != "dash_board" &&
+            ModalRoute.of(context)?.settings.name! != "login_page"
         ? BottonBack(onBack: onBack, context: context)
         : (leading ?? SizedBox());
   }

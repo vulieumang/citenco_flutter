@@ -5,6 +5,7 @@ import 'package:cnvsoft/base_citenco/page/home/drawer/drawer.dart';
 import 'package:cnvsoft/base_citenco/page/home/home_lazy.dart';
 import 'package:cnvsoft/base_citenco/page/home/home_provider.dart';
 import 'package:cnvsoft/base_citenco/package/package.dart';
+import 'package:cnvsoft/core/storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
@@ -99,7 +100,7 @@ class _HomePageState extends BasePage<HomePage, HomeProvider> with DataMix {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Xin chào: Nguyễn Văn A ",
+                          "Xin chào: ${StorageCNV().containsKey("FULL_NAME") ? StorageCNV().getString("FULL_NAME") : ""}",
                           style: BasePKG().text!.captionLowerNormal(),
                           maxLines: 2,
                           textAlign: TextAlign.center,
@@ -116,31 +117,34 @@ class _HomePageState extends BasePage<HomePage, HomeProvider> with DataMix {
                         SizedBox(
                           height: 12,
                         ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              child: Text(
-                                "Đăng xuất",
-                                style: BasePKG()
-                                    .text!
-                                    .largeLowerBold()
-                                    .copyWith(
-                                        decoration: TextDecoration.underline),
-                                maxLines: 2,
-                                textAlign: TextAlign.center,
+                        GestureDetector(
+                          onTap: provider.logout,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                child: Text(
+                                  "Đăng xuất",
+                                  style: BasePKG()
+                                      .text!
+                                      .largeLowerBold()
+                                      .copyWith(
+                                          decoration: TextDecoration.underline),
+                                  maxLines: 2,
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Image.asset(
-                              "lib/base_citenco/asset/image/ic_logout.png",
-                              width: 20,
-                              height: 20,
-                            )
-                          ],
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Image.asset(
+                                "lib/base_citenco/asset/image/ic_logout.png",
+                                width: 20,
+                                height: 20,
+                              )
+                            ],
+                          ),
                         ),
                         SizedBox(
                           height: 50,

@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:cnvsoft/base_citenco/model/login_model.dart';
+import 'package:cnvsoft/base_citenco/page/login/login_page.dart';
 import 'package:cnvsoft/base_citenco/page/scan_car/scan_car_page.dart';
 import 'package:cnvsoft/base_citenco/page/temporary_car/custom_camera/camera.dart';
 import 'package:cnvsoft/base_citenco/page/temporary_car/custom_camera/image_reviews.dart';
@@ -99,6 +101,7 @@ class BasePKG extends BasePackage {
       "error_list": (arg) => ErrorListPage(),
       "scan_car": (arg) => ScanCarPage(),
       "temporary_car": (arg) => TemporaryCarPage(),
+      "login_page": (arg) => LoginPage(),
       "web2": (arg) => FeedBackWebPage(urlView: dataOf(() => arg["url"])),
       "camera_screen_takeimage": (arg) => CameraScreen.takeimage(
             titleAppbar: dataOf(() => arg["title_appbar"], null),
@@ -115,6 +118,7 @@ class BasePKG extends BasePackage {
 
 class BaseContext extends Context with DataMix {
   static const String TOKEN_ADMIN_URL = "v1/auth/token";
+  static const String LOGIN = "api/v1/users/token";
 
   Timer? debounceMap;
 
@@ -124,7 +128,15 @@ class BaseContext extends Context with DataMix {
     return BaseContext()
       ..http = Http(state: state, factories: {
         BaseDataModel: (data) => BaseDataModel(data),
+        Lgoin: (data) => Lgoin(data: LgoinData.fromJson(data)),
       });
+  }
+
+  loginApi(phone, pass) {
+    return http!.post<Lgoin>(LOGIN, baseAPI: baseAPI, body: {
+      "userName": phone,
+      "password": pass,
+    });
   }
 }
 

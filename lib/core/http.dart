@@ -81,7 +81,7 @@ class Http with DataMix {
       "X-DOMAIN-NAME": stringOf(() => accountDomainName),
       "X-CNV-CLIENT-APPS": BaseScope().clientAppHeader.toString(),
       'X-Device-Id': deviceId,
-      "Authorization": "Token " + (StorageCNV().getString("TOKEN") ?? "")
+      "Authorization": "bearer " + (StorageCNV().getString("AUTH_TOKEN") ?? "")
       // "Token 5f2a6f2cac27eb174cfd07c7" // temp token dot NET, waiting for dot NET improve api in order to remove
     };
 
@@ -267,7 +267,6 @@ class Http with DataMix {
           error: kDebugMode),
     ]);
 
-
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
       client.badCertificateCallback =
@@ -298,8 +297,8 @@ class Http with DataMix {
       }
     });
 
-    return _completed<T>(
-        path, options.queryParameters, bodies ?? {}, response, from, dio.options.baseUrl);
+    return _completed<T>(path, options.queryParameters, bodies ?? {}, response,
+        from, dio.options.baseUrl);
   }
 
   Interceptor get _getInterceptor => LogInterceptor(
@@ -490,8 +489,13 @@ class Http with DataMix {
         });
   }
 
-  Future<T> _completed<T>(String subUrl, Map<String, dynamic>? params,
-      Map<String, dynamic> bodies, dynamic response, DateTime from,String baseUrl) async {
+  Future<T> _completed<T>(
+      String subUrl,
+      Map<String, dynamic>? params,
+      Map<String, dynamic> bodies,
+      dynamic response,
+      DateTime from,
+      String baseUrl) async {
     String path = "";
 
     if (subUrl.isNotEmpty && !(params ?? {}).containsKey("q")) {
@@ -558,7 +562,6 @@ class Http with DataMix {
       result = parse<T>(_json);
 
       if (statusCode == HttpStatus.forbidden) {
-        
       } else if (result is BaseModel) {
         result.statusCode = statusCode;
         result.redirectLink = redirectLink;
@@ -590,7 +593,7 @@ class Http with DataMix {
               title: "Error: ${result.statusCode}",
               isError: true,
               data: {
-                "api": baseUrl+url,
+                "api": baseUrl + url,
                 "header": _baseHeader(),
                 "params": params,
                 "body": bodies,
@@ -601,11 +604,10 @@ class Http with DataMix {
               });
         }
         if (statusCode == HttpStatus.unauthorized) {
-          if (!PackageManager().requiredLogout &&
-              !MyProfile().isGuest  ) {
+          if (!PackageManager().requiredLogout && !MyProfile().isGuest) {
             PackageManager().requiredLogout = true;
-            if(statusCode != 401)
-            await MessageDialog.showErrors(state!, result.error);
+            if (statusCode != 401)
+              await MessageDialog.showErrors(state!, result.error);
             await MyProfile().logOut(state!, false);
             PackageManager().requiredLogout = false;
             App.restart();
