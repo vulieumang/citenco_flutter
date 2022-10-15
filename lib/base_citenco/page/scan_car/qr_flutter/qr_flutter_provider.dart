@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cnvsoft/base_citenco/package/package.dart';
 import 'package:cnvsoft/base_citenco/page/scan_car/qr_flutter/qr_flutter_page.dart';
 import 'package:cnvsoft/core/base_core/base_notifier.dart';
 import 'package:cnvsoft/core/base_core/base_provider.dart';
@@ -24,10 +25,12 @@ class QrFlutterProvider extends BaseProvider<QrFlutterPageState> {
   GlobalKey get qrKey => _qrKey;
   GlobalKey get containerKey => _containerKey;
   bool get allowCamera => _permissionStatus.value == PermissionStatus.granted;
+  var open;
 
   @override
   Future<void> onReady(callback) async {
     super.onReady(callback);
+    open = 1;
     await refreshCameraPermission();
     if (!allowCamera) showPermissionRequest(false);
     startCountDown();
@@ -40,9 +43,7 @@ class QrFlutterProvider extends BaseProvider<QrFlutterPageState> {
 
   @override
   void dispose() {
-    if (_permissionStatus.value == PermissionStatus.granted) {
-      qrViewController?.dispose();
-    }
+    qrViewController?.dispose();
     super.dispose();
   }
 
@@ -124,10 +125,20 @@ class QrFlutterProvider extends BaseProvider<QrFlutterPageState> {
 
   onQRViewCreated(QRViewController qrViewController) {
     this.qrViewController = qrViewController;
-    qrViewController.scanInvert(true);
+    qrViewController.resumeCamera();
     qrViewController.scannedDataStream.listen((scanData) async {
-      if (state.widget.scanData != null) {
-        state.widget.scanData!(scanData);
+      if (scanData.code != "") {
+        showLoading();
+        var res;
+        qrViewController.pauseCamera();
+        res = await BasePKG.of(state).scan(id: scanData.code);
+        if (res.data.code == 200) {
+          await Navigator.of(state.context).pushNamed("info_car_page",
+              arguments: {
+                "data": res.data.data
+              }).then((value) => qrViewController.resumeCamera());
+        }
+        hideLoading();
       }
     });
   }

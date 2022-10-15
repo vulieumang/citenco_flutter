@@ -1,4 +1,4 @@
- import 'package:cnvsoft/core/base_core/base_model.dart';
+import 'package:cnvsoft/core/base_core/base_model.dart';
 import 'package:flutter/material.dart';
 
 class ImageUploadRespo extends BaseModel {

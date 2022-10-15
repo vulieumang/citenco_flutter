@@ -56,6 +56,14 @@ class LoginProvider extends BaseProvider<LoginPageState> {
     textFieldFocusNode.canRequestFocus = false;
   }
 
+  onChangePhone() {
+    _checkPhoneNotifier.value = false;
+  }
+
+  onChangePass() {
+    _checkPassNotifier.value = false;
+  }
+
   Future<void> onClickSignIn() async {
     //validate phone
     super.hideKeyboard();
@@ -70,6 +78,8 @@ class LoginProvider extends BaseProvider<LoginPageState> {
         await StorageCNV().setString("FULL_NAME", res.data.data.fullName);
         Navigator.of(state.context).pushReplacementNamed("dash_board");
       }
+      _checkPassNotifier.value = true;
+      _checkPhoneNotifier.value = true;
     } else {
       _checkPassNotifier.value = true;
       _checkPhoneNotifier.value = true;

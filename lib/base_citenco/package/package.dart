@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:cnvsoft/base_citenco/model/login_model.dart';
+import 'package:cnvsoft/base_citenco/model/scand_model.dart';
 import 'package:cnvsoft/base_citenco/page/login/login_page.dart';
-import 'package:cnvsoft/base_citenco/page/scan_car/scan_car_page.dart';
+import 'package:cnvsoft/base_citenco/page/scan_car/info_scan/info_car_page.dart';
+import 'package:cnvsoft/base_citenco/page/scan_car/qr_flutter/qr_flutter_page.dart';
 import 'package:cnvsoft/base_citenco/page/temporary_car/custom_camera/camera.dart';
 import 'package:cnvsoft/base_citenco/page/temporary_car/custom_camera/image_reviews.dart';
 import 'package:cnvsoft/base_citenco/page/temporary_car/temporary_car_page.dart';
@@ -99,9 +101,12 @@ class BasePKG extends BasePackage {
       "landing": (arg) => LandingPage(),
       "error": (arg) => ErrorPage(error: arg["error"]),
       "error_list": (arg) => ErrorListPage(),
-      "scan_car": (arg) => ScanCarPage(),
+      "scan_car": (arg) => QrFlutterPage(),
       "temporary_car": (arg) => TemporaryCarPage(),
       "login_page": (arg) => LoginPage(),
+      "info_car_page": (arg) => InfoCarPage(
+            data: arg["data"],
+          ),
       "web2": (arg) => FeedBackWebPage(urlView: dataOf(() => arg["url"])),
       "camera_screen_takeimage": (arg) => CameraScreen.takeimage(
             titleAppbar: dataOf(() => arg["title_appbar"], null),
@@ -119,6 +124,8 @@ class BasePKG extends BasePackage {
 class BaseContext extends Context with DataMix {
   static const String TOKEN_ADMIN_URL = "v1/auth/token";
   static const String LOGIN = "api/v1/users/token";
+  static const String HISTORIS = "api/v1/users/histories";
+  static const String SCAN = "api/v1/vehicles/";
 
   Timer? debounceMap;
 
@@ -129,6 +136,7 @@ class BaseContext extends Context with DataMix {
       ..http = Http(state: state, factories: {
         BaseDataModel: (data) => BaseDataModel(data),
         Lgoin: (data) => Lgoin(data: LgoinData.fromJson(data)),
+        DataScan: (data) => DataScan(data: DataScanData.fromJson(data)),
       });
   }
 
@@ -137,6 +145,29 @@ class BaseContext extends Context with DataMix {
       "userName": phone,
       "password": pass,
     });
+  }
+
+  history(
+      {vehicleDriverName,
+      vehicleType,
+      vehicleLoad,
+      images,
+      vehicleLicensePlate}) {
+    return http!.post<Lgoin>(HISTORIS, baseAPI: baseAPI, body: {
+      "vehicleInStationAt": DateTime.now().toUtc().toString(),
+      "vehicleDriverName": vehicleDriverName,
+      "vehicleType": vehicleType,
+      "vehicleLicensePlate": vehicleLicensePlate,
+      "vehicleLoad": vehicleLoad,
+      "images": images
+    });
+  }
+
+  scan({id}) {
+    return http!.get<DataScan>(
+      SCAN + id + "/scanInformation",
+      baseAPI: baseAPI,
+    );
   }
 }
 

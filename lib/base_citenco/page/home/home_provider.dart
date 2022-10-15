@@ -47,6 +47,7 @@ class HomeProvider extends BaseProvider with DataMix {
   }
 
   logout() {
+    showLoading();
     StorageCNV().clearSession();
     Navigator.pushNamedAndRemoveUntil(context!, "login_page", (route) => false);
   }

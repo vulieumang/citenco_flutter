@@ -12,14 +12,10 @@ enum QrFlutterScanType { DEFAULT, QRCODE, BARCODE }
 
 class QrFlutterPage extends StatefulWidget {
   final QrFlutterScanType? qrFlutterScanType;
-  final bool? resumeCamera;
-  final BarcodeValueCallback? scanData;
+  // final bool? resumeCamera;
+  // final BarcodeValueCallback? scanData;
 
-  QrFlutterPage(
-      {Key? key,
-      required this.qrFlutterScanType,
-      this.resumeCamera,
-      required this.scanData})
+  QrFlutterPage({Key? key, this.qrFlutterScanType = QrFlutterScanType.QRCODE})
       : assert(qrFlutterScanType != null),
         super(key: key);
 
@@ -47,8 +43,7 @@ class QrFlutterPage extends StatefulWidget {
     return await showDialog(
         context: state.context,
         builder: (context) {
-          return QrFlutterPage(
-              qrFlutterScanType: QrFlutterScanType.DEFAULT, scanData: scanData);
+          return QrFlutterPage(qrFlutterScanType: QrFlutterScanType.DEFAULT);
         });
   }
 
@@ -73,8 +68,7 @@ class QrFlutterPage extends StatefulWidget {
     return await showDialog(
         context: state.context,
         builder: (context) {
-          return QrFlutterPage(
-              qrFlutterScanType: QrFlutterScanType.BARCODE, scanData: scanData);
+          return QrFlutterPage(qrFlutterScanType: QrFlutterScanType.BARCODE);
         });
   }
 
@@ -99,8 +93,7 @@ class QrFlutterPage extends StatefulWidget {
     return await showDialog(
         context: state.context,
         builder: (context) {
-          return QrFlutterPage(
-              qrFlutterScanType: QrFlutterScanType.QRCODE, scanData: scanData);
+          return QrFlutterPage(qrFlutterScanType: QrFlutterScanType.QRCODE);
         });
   }
 }
@@ -122,11 +115,11 @@ class QrFlutterPageState extends BasePage<QrFlutterPage, QrFlutterProvider> {
   @override
   void didUpdateWidget(QrFlutterPage oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (BasePKG().boolOf(() =>
-        widget.resumeCamera != null &&
-        oldWidget.resumeCamera != widget.resumeCamera)) {
-      provider.onOpenCamera(widget.resumeCamera!);
-    }
+    // if (BasePKG().boolOf(() =>
+    //     widget.resumeCamera != null &&
+    //     oldWidget.resumeCamera != widget.resumeCamera)) {
+    // provider.onOpenCamera(true);
+    // }
   }
 
   @override

@@ -75,12 +75,12 @@ class Http with DataMix {
         stringOf(() => ModalRoute.of(state!.context)?.settings.name!);
 
     Map<String, String?> _headerNET = {
-      "X-CLIENT-USER-ID":
-          dataOf(() => MyProfile().customerId.toString(), null, ['null']),
-      'X-Screen-Id': navigateName,
-      "X-DOMAIN-NAME": stringOf(() => accountDomainName),
-      "X-CNV-CLIENT-APPS": BaseScope().clientAppHeader.toString(),
-      'X-Device-Id': deviceId,
+      // "X-CLIENT-USER-ID":
+      //     dataOf(() => MyProfile().customerId.toString(), null, ['null']),
+      // 'X-Screen-Id': navigateName,
+      // "X-DOMAIN-NAME": stringOf(() => accountDomainName),
+      // "X-CNV-CLIENT-APPS": BaseScope().clientAppHeader.toString(),
+      // 'X-Device-Id': deviceId,
       "Authorization": "bearer " + (StorageCNV().getString("AUTH_TOKEN") ?? "")
       // "Token 5f2a6f2cac27eb174cfd07c7" // temp token dot NET, waiting for dot NET improve api in order to remove
     };

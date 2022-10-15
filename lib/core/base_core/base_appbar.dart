@@ -35,7 +35,7 @@ class AppBarData {
       this.systemOverlayStyle,
       this.flexibleSpace,
       this.radius = 30,
-      this.height = 80,
+      this.height = 70,
       this.evelation})
       : text = text ?? "";
 
@@ -100,7 +100,7 @@ class AppBarData {
           Color(0xff0F5A6B),
         ]);
     return PreferredSize(
-      preferredSize: Size.fromHeight(radius == 0 ? 50 : height ?? 80.0),
+      preferredSize: Size.fromHeight(radius == 0 ? 50 : height ?? 70.0),
       child: AppBar(
         flexibleSpace: flexibleSpace ?? Container(),
         shape: RoundedRectangleBorder(
@@ -154,11 +154,21 @@ class BottonBack extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            child: SvgPicture.asset(
-              "lib/base_citenco/asset/image/ic_arrow_left.svg",
-              height: 24,
-              width: 24,
-              color: BasePKG().color.iconColorPr,
+            child: Row(
+              children: [
+                SvgPicture.asset(
+                  "lib/base_citenco/asset/image/ic_arrow_left.svg",
+                  height: 24,
+                  width: 24,
+                  color: BasePKG().color.iconColorPr,
+                ),
+                Text(
+                  "Back",
+                  style: BasePKG().text!.smallNormal().copyWith(
+                        color: BasePKG().color.iconColorPr,
+                      ),
+                )
+              ],
             ),
           ),
         ],

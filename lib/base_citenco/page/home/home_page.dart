@@ -22,6 +22,7 @@ class _HomePageState extends BasePage<HomePage, HomeProvider> with DataMix {
     super.initState();
     appBar = AppBarData(context,
         flexibleSpace: Container(
+          alignment: Alignment.center,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,

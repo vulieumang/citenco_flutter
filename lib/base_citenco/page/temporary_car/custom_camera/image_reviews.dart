@@ -4,7 +4,7 @@ import 'package:cnvsoft/base_citenco/page/temporary_car/custom_camera/image_revi
 import 'package:cnvsoft/core/base_core/base_appbar.dart';
 import 'package:cnvsoft/core/base_core/base_page.dart';
 
-import 'package:cnvsoft/base_citenco/package/package.dart'; 
+import 'package:cnvsoft/base_citenco/package/package.dart';
 import 'package:cnvsoft/base_citenco/package/trans.dart';
 import 'package:cnvsoft/base_citenco/util.dart';
 import 'package:cnvsoft/base_citenco/view/square_button.dart';
@@ -33,13 +33,13 @@ class ImageReviewsState extends BasePage<ImageReviews, ImageReviewsProvider> {
       radius: 0,
       text: "${BaseTrans().$editImage}",
       actions: <Widget>[
-        IconButton(
-          icon: SvgPicture.asset("lib/base_citenco/asset/image/crop_image.svg",
-              height: 20, width: 20, color: BasePKG().color.appBarTitle),
-          onPressed: () {
-            provider.cropImageFunc();
-          },
-        )
+        // IconButton(
+        //   icon: SvgPicture.asset("lib/base_citenco/asset/image/crop_image.svg",
+        //       height: 20, width: 20, color: BasePKG().color.appBarTitle),
+        //   onPressed: () {
+        //     provider.cropImageFunc();
+        //   },
+        // )
       ],
     );
     super.initState();

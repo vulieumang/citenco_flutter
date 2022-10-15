@@ -31,8 +31,6 @@ class Config {
 
   static void config() {
     BasePKG().env = ENV(
-        env:  "production",
-        accountDomainName: "shop-pro"
-        );
+        env: "production", accountDomainName: "http://citencoapi.vuweb.vn/");
   }
 }

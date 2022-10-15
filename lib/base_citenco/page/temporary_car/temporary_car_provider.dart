@@ -6,18 +6,22 @@ import 'package:cnvsoft/base_citenco/package/package.dart';
 import 'package:cnvsoft/base_citenco/page/temporary_car/review_image/review_image.dart';
 import 'package:cnvsoft/base_citenco/util.dart';
 import 'package:cnvsoft/core/base_core/base_notifier.dart';
-import 'package:cnvsoft/core/base_core/base_provider.dart';  
+import 'package:cnvsoft/core/base_core/base_provider.dart';
 import 'package:cnvsoft/base_citenco/package/level_asset.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart'; 
+import 'package:provider/provider.dart';
 
 import 'temporary_car_page.dart';
 
-class TemporaryCarProvider extends BaseProvider<TemporaryCarPageState> with TakePictureMix,PermissionMix  {
-  TemporaryCarProvider(TemporaryCarPageState state) : super(state); 
-  final TextEditingController noteCtrl = TextEditingController(); 
-  final ImagesReviewNotifier _imageReview = ImagesReviewNotifier(); 
-  List<String> _criteria = []; 
+class TemporaryCarProvider extends BaseProvider<TemporaryCarPageState>
+    with TakePictureMix, PermissionMix {
+  TemporaryCarProvider(TemporaryCarPageState state) : super(state);
+  final TextEditingController biesoController = TextEditingController();
+  final TextEditingController khoiluongController = TextEditingController();
+  final TextEditingController TenTaiXeController = TextEditingController();
+  final TextEditingController LoaiXeController = TextEditingController();
+  final ImagesReviewNotifier _imageReview = ImagesReviewNotifier();
+  List<String> _criteria = [];
 
   void addListCriteria(String value) {
     if (_criteria.contains(value)) {
@@ -27,25 +31,46 @@ class TemporaryCarProvider extends BaseProvider<TemporaryCarPageState> with Take
     }
   }
 
-  onImagePressed(images,context) async {
+  onImagePressed(images, context) async {
     dynamic image = [];
     for (var item in images) {
-      image.add(ImageNET()..id = images.indexOf(item)..url= item.path ..isDefault = false);
+      image.add(ImageNET()
+        ..id = images.indexOf(item)
+        ..url = item.path
+        ..isDefault = false);
     }
-    await Navigator
-        .push(context, MaterialPageRoute(builder: (context) => ReviewImage(images: image ,)),);
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => ReviewImage(
+                images: image,
+              )),
+    );
   }
- 
 
   @override
   void onReady(callback) {
-    super.onReady(callback); 
+    super.onReady(callback);
   }
 
   @override
-  List<BaseNotifier> initNotifiers() => [  
+  List<BaseNotifier> initNotifiers() => [
         _imageReview,
-      ];  
+      ];
+
+  sendDataApi() async {
+    showLoading();
+    if (biesoController.text.isNotEmpty &&
+        khoiluongController.text.isNotEmpty &&
+        _imageReview.value!.length > 0)
+      var res = await BasePKG.of(state).history(
+          // vehicleDriverName: "",
+          vehicleLoad: khoiluongController.text,
+          vehicleLicensePlate: biesoController.text,
+          // vehicleType: ,
+          images: _imageReview.value!.map((e) => e.url).toList());
+    hideLoading();
+  }
 
   void onSelectImage() async {
     bool hasPermission =
@@ -73,9 +98,10 @@ class TemporaryCarProvider extends BaseProvider<TemporaryCarPageState> with Take
 
       ImageUploaded _imageNoti = ImageUploaded();
       _imageNoti.path = imagePath;
+      _imageNoti.url = _attach;
       _temp.add(_imageNoti);
 
-      _imageReview.value = List.from(_temp); 
+      _imageReview.value = List.from(_temp);
     }
   }
 
@@ -88,10 +114,10 @@ class TemporaryCarProvider extends BaseProvider<TemporaryCarPageState> with Take
   }
 
   @override
-  void dispose() { 
+  void dispose() {
     super.dispose();
   }
-} 
+}
 
 class ImagesReviewNotifier extends BaseNotifier<List<ImageUploaded>> {
   ImagesReviewNotifier() : super([]);
@@ -107,7 +133,7 @@ class ImagesReviewNotifier extends BaseNotifier<List<ImageUploaded>> {
   @override
   ListenableProvider<Listenable?> provider() =>
       ChangeNotifierProvider<ImagesReviewNotifier>(create: (_) => this);
-} 
+}
 
 class RatingTextNotifier extends BaseNotifier<String> {
   RatingTextNotifier() : super("");
@@ -116,7 +142,7 @@ class RatingTextNotifier extends BaseNotifier<String> {
   ListenableProvider provider() {
     return ChangeNotifierProvider<RatingTextNotifier>(create: (_) => this);
   }
-} 
+}
 
 class ContentImprovedListNotifier extends BaseNotifier<List<String>> {
   ContentImprovedListNotifier() : super([]);
@@ -126,5 +152,4 @@ class ContentImprovedListNotifier extends BaseNotifier<List<String>> {
     return ChangeNotifierProvider<ContentImprovedListNotifier>(
         create: (_) => this);
   }
-} 
- 
+}

@@ -47,129 +47,186 @@ class TemporaryCarPageState
     return Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      child: Column(
-        children: [
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  "Đăng ký xe vãng lai",
-                  style: BasePKG()
-                      .text!
-                      .largeUpperBold()
-                      .copyWith(color: Color(0xff0089FF)),
-                ),
-              ],
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    "Đăng ký xe vãng lai",
+                    style: BasePKG()
+                        .text!
+                        .largeUpperBold()
+                        .copyWith(color: Color(0xff0089FF)),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: GestureDetector(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    GestureDetector(
-                      child: Container(
-                          child: Text(
-                        "Biển số xe",
-                        style: BasePKG()
-                            .text!
-                            .largeUpperBold()
-                            .copyWith(color: Color(0xff023C6D)),
-                      )),
-                    )
-                  ],
-                ),
-              )),
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 16),
-            child: TextFieldCustom(
-              controller: TextEditingController(),
-              nameField: "Nhập biển số xe",
+            Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: GestureDetector(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      GestureDetector(
+                        child: Container(
+                            child: Text(
+                          "Biển số xe",
+                          style: BasePKG()
+                              .text!
+                              .largeUpperBold()
+                              .copyWith(color: Color(0xff023C6D)),
+                        )),
+                      )
+                    ],
+                  ),
+                )),
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 16),
+              child: TextFieldCustom(
+                controller: provider.biesoController,
+                nameField: "Nhập biển số xe",
+              ),
             ),
-          ),
-          Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: GestureDetector(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    GestureDetector(
-                      child: Container(
-                          child: Text(
-                        "Khối lượng (KG)",
-                        style: BasePKG()
-                            .text!
-                            .largeUpperBold()
-                            .copyWith(color: Color(0xff023C6D)),
-                      )),
-                    )
-                  ],
-                ),
-              )),
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 16),
-            child: TextFieldCustom(
-              controller: TextEditingController(),
-              nameField: "Khối lượng (KG)",
+            Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: GestureDetector(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      GestureDetector(
+                        child: Container(
+                            child: Text(
+                          "Khối lượng (KG)",
+                          style: BasePKG()
+                              .text!
+                              .largeUpperBold()
+                              .copyWith(color: Color(0xff023C6D)),
+                        )),
+                      )
+                    ],
+                  ),
+                )),
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 16),
+              child: TextFieldCustom(
+                controller: provider.khoiluongController,
+                nameField: "Khối lượng (KG)",
+              ),
             ),
-          ),
-          Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: GestureDetector(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    GestureDetector(
-                      child: Container(
-                          child: Text(
-                        "Hình ảnh",
-                        style: BasePKG()
-                            .text!
-                            .largeUpperBold()
-                            .copyWith(color: Color(0xff023C6D)),
-                      )),
-                    )
-                  ],
-                ),
-              )),
-          SizedBox(
-            height: 20,
-          ),
-          Padding(
-              padding: BasePKG().symmetric(horizontal: 20),
+            Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: GestureDetector(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      GestureDetector(
+                        child: Container(
+                            child: Text(
+                          "Hình ảnh",
+                          style: BasePKG()
+                              .text!
+                              .largeUpperBold()
+                              .copyWith(color: Color(0xff023C6D)),
+                        )),
+                      )
+                    ],
+                  ),
+                )),
+            // Container(
+            //   padding: EdgeInsets.symmetric(vertical: 16),
+            //   child: TextFieldCustom(
+            //     controller: provider.TenTaiXeController,
+            //     nameField: "Tên tài xế",
+            //   ),
+            // ),
+            // Container(
+            //     padding: EdgeInsets.symmetric(horizontal: 20),
+            //     child: GestureDetector(
+            //       child: Row(
+            //         mainAxisAlignment: MainAxisAlignment.start,
+            //         children: [
+            //           GestureDetector(
+            //             child: Container(
+            //                 child: Text(
+            //               "Tên tài xế",
+            //               style: BasePKG()
+            //                   .text!
+            //                   .largeUpperBold()
+            //                   .copyWith(color: Color(0xff023C6D)),
+            //             )),
+            //           )
+            //         ],
+            //       ),
+            //     )),
+            // Container(
+            //   padding: EdgeInsets.symmetric(vertical: 16),
+            //   child: TextFieldCustom(
+            //     controller: provider.LoaiXeController,
+            //     nameField: "Loại xe",
+            //   ),
+            // ),
+            // Container(
+            //     padding: EdgeInsets.symmetric(horizontal: 20),
+            //     child: GestureDetector(
+            //       child: Row(
+            //         mainAxisAlignment: MainAxisAlignment.start,
+            //         children: [
+            //           GestureDetector(
+            //             child: Container(
+            //                 child: Text(
+            //               "Loại xe",
+            //               style: BasePKG()
+            //                   .text!
+            //                   .largeUpperBold()
+            //                   .copyWith(color: Color(0xff023C6D)),
+            //             )),
+            //           )
+            //         ],
+            //       ),
+            //     )),
+            SizedBox(
+              height: 20,
+            ),
+            Padding(
+                padding: BasePKG().symmetric(horizontal: 20),
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(3),
+                      border: Border.all(width: 1, color: Color(0xff539EF8))),
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        _addImages(),
+                      ]),
+                )),
+            SizedBox(
+              height: 30,
+            ),
+            GestureDetector(
+              onTap: provider.sendDataApi,
               child: Container(
+                width: 200,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(3),
-                    border: Border.all(width: 1, color: Color(0xff539EF8))),
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      _addImages(),
-                    ]),
-              )),
-          SizedBox(
-            height: 30,
-          ),
-          Container(
-            width: 200,
-            decoration: BoxDecoration(
-                color: BasePKG().color.primaryColor,
-                borderRadius: BorderRadius.circular(50)),
-            alignment: Alignment.center,
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 5),
-              child: Text("Ghi lại",
-                  style: BasePKG()
-                      .text!
-                      .captionBold()
-                      .copyWith(color: Colors.white)),
-            ),
-          )
-        ],
+                    color: BasePKG().color.primaryColor,
+                    borderRadius: BorderRadius.circular(50)),
+                alignment: Alignment.center,
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 5),
+                  child: Text("Ghi lại",
+                      style: BasePKG()
+                          .text!
+                          .captionBold()
+                          .copyWith(color: Colors.white)),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

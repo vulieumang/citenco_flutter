@@ -1,5 +1,4 @@
 import 'package:cnvsoft/base_citenco/page/home/home_page.dart';
-import 'package:cnvsoft/base_citenco/page/scan_car/scan_car_page.dart';
 import 'package:cnvsoft/base_citenco/page/temporary_car/temporary_car_page.dart';
 import 'package:cnvsoft/core/bus.dart';
 import 'package:cnvsoft/core/http.dart';

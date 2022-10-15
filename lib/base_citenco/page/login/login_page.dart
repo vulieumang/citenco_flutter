@@ -55,6 +55,9 @@ class LoginPageState extends BasePage<LoginPage, LoginProvider> with DataMix {
                   padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                   child: TextField(
                     controller: provider.phoneController,
+                    onChanged: ((value) {
+                      provider.onChangePhone();
+                    }),
                     decoration: InputDecoration(
                       errorText: checkPhone.value! ? provider.phoneError : null,
                       border: OutlineInputBorder(
@@ -73,6 +76,9 @@ class LoginPageState extends BasePage<LoginPage, LoginProvider> with DataMix {
                         controller: provider.passwordController,
                         focusNode: provider.textFieldFocusNode,
                         obscureText: showPass.value! ? true : false,
+                        onChanged: ((value) {
+                          provider.onChangePass();
+                        }),
                         decoration: InputDecoration(
                           errorText:
                               checkPass.value! ? provider.passwordError : null,
