@@ -210,7 +210,7 @@ class MessageDialog extends StatelessWidget {
             radius: 36,
             backgroundColor: BasePKG().color.icDialogError,
             child: SvgPicture.asset(
-              "lib/special/base_citenco/asset/image/close.svg",
+              "lib/base_citenco/asset/image/close.svg",
               color: Colors.white, //BasePKG().color.card,
               height: 24,
             ),

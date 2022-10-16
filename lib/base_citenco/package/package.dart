@@ -7,6 +7,7 @@ import 'package:cnvsoft/base_citenco/page/scan_car/qr_flutter/qr_flutter_page.da
 import 'package:cnvsoft/base_citenco/page/temporary_car/custom_camera/camera.dart';
 import 'package:cnvsoft/base_citenco/page/temporary_car/custom_camera/image_reviews.dart';
 import 'package:cnvsoft/base_citenco/page/temporary_car/temporary_car_page.dart';
+import 'package:cnvsoft/base_citenco/page/temporary_car/verify_register_car/verify_register_page.dart';
 import 'package:cnvsoft/core/base_core/base_model.dart';
 import 'package:cnvsoft/core/base_core/data_mix.dart';
 import 'package:cnvsoft/core/bus.dart';
@@ -21,6 +22,7 @@ import 'package:cnvsoft/base_citenco/page/webView2/web_view_core/web_page.dart';
 import 'package:cnvsoft/base_citenco/view/square_button.dart';
 import 'package:cnvsoft/base_citenco/modify/package.dart';
 import 'package:flutter/material.dart';
+import '../page/scan_car/verify_car/verify_page.dart';
 import 'button_style.dart';
 import 'color_style.dart';
 import 'decoration_style.dart';
@@ -104,6 +106,8 @@ class BasePKG extends BasePackage {
       "scan_car": (arg) => QrFlutterPage(),
       "temporary_car": (arg) => TemporaryCarPage(),
       "login_page": (arg) => LoginPage(),
+      "verify_car_page": (arg) => VerifyCarPage(),
+      "verify_car_register_page": (arg) => VerifyCarRegisterPage(),
       "info_car_page": (arg) => InfoCarPage(
             data: arg["data"],
           ),
@@ -124,8 +128,9 @@ class BasePKG extends BasePackage {
 class BaseContext extends Context with DataMix {
   static const String TOKEN_ADMIN_URL = "v1/auth/token";
   static const String LOGIN = "api/v1/users/token";
-  static const String HISTORIS = "api/v1/users/histories";
+  static const String HISTORIS = "api/v1/histories";
   static const String SCAN = "api/v1/vehicles/";
+  static const String SCAN_VERIFY = "api/v1/histories";
 
   Timer? debounceMap;
 
@@ -153,7 +158,7 @@ class BaseContext extends Context with DataMix {
       vehicleLoad,
       images,
       vehicleLicensePlate}) {
-    return http!.post<Lgoin>(HISTORIS, baseAPI: baseAPI, body: {
+    return http!.post<BaseDataModel>(HISTORIS, baseAPI: baseAPI, body: {
       "vehicleInStationAt": DateTime.now().toUtc().toString(),
       "vehicleDriverName": vehicleDriverName,
       "vehicleType": vehicleType,
@@ -167,6 +172,19 @@ class BaseContext extends Context with DataMix {
     return http!.get<DataScan>(
       SCAN + id + "/scanInformation",
       baseAPI: baseAPI,
+    );
+  }
+
+  scanVerify({int? id}) {
+    return http!.post<BaseDataModel>(
+      SCAN_VERIFY,
+      baseAPI: baseAPI,
+      body: {
+        "vehicleId": id,
+        "vehicleInStationAt": DateTime.now().toUtc().toString(),
+        "note": "",
+        "images": []
+      },
     );
   }
 }

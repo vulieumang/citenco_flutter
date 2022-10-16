@@ -103,7 +103,7 @@ class QrFlutterPageState extends BasePage<QrFlutterPage, QrFlutterProvider> {
   void initState() {
     super.initState();
     appBar = AppBarData(context,
-        height: 70,
+        height: 60,
         title: Text(
           "Quét xe vào trạm",
           style: BasePKG().text!.normalNormal().copyWith(color: Colors.white),
@@ -114,7 +114,7 @@ class QrFlutterPageState extends BasePage<QrFlutterPage, QrFlutterProvider> {
 
   @override
   void didUpdateWidget(QrFlutterPage oldWidget) {
-    super.didUpdateWidget(oldWidget);
+    super.didUpdateWidget(oldWidget); 
     // if (BasePKG().boolOf(() =>
     //     widget.resumeCamera != null &&
     //     oldWidget.resumeCamera != widget.resumeCamera)) {

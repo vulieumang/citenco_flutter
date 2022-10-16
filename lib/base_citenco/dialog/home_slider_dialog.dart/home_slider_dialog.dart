@@ -95,7 +95,7 @@
 //               child: Padding(
 //                   padding: BasePKG().all(7),
 //                   child: SvgPicture.asset(
-//                       "lib/special/base_citenco/asset/image/close.svg",
+//                       "lib/base_citenco/asset/image/close.svg",
 //                       width: 15))),
 //           Padding(
 //               padding: BasePKG().symmetric(vertical: 30),

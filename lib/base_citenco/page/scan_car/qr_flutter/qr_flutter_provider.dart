@@ -51,7 +51,7 @@ class QrFlutterProvider extends BaseProvider<QrFlutterPageState> {
   void startCountDown([int? initSeconds]) {
     Timer.periodic(Duration(seconds: 1), (_) {
       if (state.mounted) {
-        _countDown.value = _countDown.value! - 1;
+        if (_countDown.value != 0) _countDown.value = _countDown.value! - 1;
       }
     });
   }
@@ -134,9 +134,10 @@ class QrFlutterProvider extends BaseProvider<QrFlutterPageState> {
         res = await BasePKG.of(state).scan(id: scanData.code);
         if (res.data.code == 200) {
           await Navigator.of(state.context).pushNamed("info_car_page",
-              arguments: {
-                "data": res.data.data
-              }).then((value) => qrViewController.resumeCamera());
+              arguments: {"data": res.data.data}).then((value) {
+            qrViewController.resumeCamera();
+            _countDown.value = 60;
+          });
         }
         hideLoading();
       }

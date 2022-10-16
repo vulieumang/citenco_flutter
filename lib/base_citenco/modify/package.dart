@@ -34,7 +34,6 @@ class ModifyPKG extends BasePackage {
   @override
   Map<String, Function(dynamic arg)> getPages() {
     return {
-      // "dash_board": (arg) => DashBoardPage(),
       "dash_board": (arg) => HomePage(),
     };
   }

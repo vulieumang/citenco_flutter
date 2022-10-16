@@ -1,4 +1,4 @@
-package com.example.cutenco
+package com.example.citenco
 
 import io.flutter.embedding.android.FlutterActivity
 

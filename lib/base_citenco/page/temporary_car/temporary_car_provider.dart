@@ -1,3 +1,4 @@
+import 'package:cnvsoft/base_citenco/dialog/message_dialog.dart';
 import 'package:cnvsoft/base_citenco/mix/permission_mix.dart';
 import 'package:cnvsoft/base_citenco/mix/take_picture_mix.dart';
 import 'package:cnvsoft/base_citenco/model/image.dart';
@@ -62,13 +63,24 @@ class TemporaryCarProvider extends BaseProvider<TemporaryCarPageState>
     showLoading();
     if (biesoController.text.isNotEmpty &&
         khoiluongController.text.isNotEmpty &&
-        _imageReview.value!.length > 0)
+        _imageReview.value!.length > 0) {
       var res = await BasePKG.of(state).history(
           // vehicleDriverName: "",
           vehicleLoad: khoiluongController.text,
           vehicleLicensePlate: biesoController.text,
           // vehicleType: ,
           images: _imageReview.value!.map((e) => e.url).toList());
+      if (res.data["code"] == 200) {
+        Navigator.pushNamed(state.context, "verify_car_register_page");
+      } else {
+        MessageDialog.showErrors(
+          state,
+          "Đã xảy ra lỗi xác nhận",
+          "Thông báo",
+        );
+      }
+    }
+
     hideLoading();
   }
 

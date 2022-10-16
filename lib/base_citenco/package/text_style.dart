@@ -272,7 +272,7 @@ class BaseText {
       .copyWith(fontSize: largeUpper, fontWeight: FontWeight.w900);
 
   /// [23]*/
-  TextStyle captionLowerNormal() => fontFamilyStyle()
+  TextStyle   captionLowerNormal() => fontFamilyStyle()
       .copyWith(fontSize: captionLower, fontWeight: FontWeight.w400);
 
   /// [23]*/

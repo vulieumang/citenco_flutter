@@ -76,6 +76,8 @@ class LoginProvider extends BaseProvider<LoginPageState> {
         await StorageCNV().setString("AUTH_TOKEN", res.data.data.token);
         await StorageCNV().setString("PHONE_NUMBER", res.data.data.token);
         await StorageCNV().setString("FULL_NAME", res.data.data.fullName);
+        await StorageCNV().setInt("AddVehicleHistoryOverLimitation",
+            res.data.data.permissions.length);
         Navigator.of(state.context).pushReplacementNamed("dash_board");
       }
       _checkPassNotifier.value = true;

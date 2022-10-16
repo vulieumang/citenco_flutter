@@ -86,7 +86,7 @@ class MenuListView extends StatelessWidget {
               width: BasePKG().convert(32),
               child: SizedBox(
                 child: SvgPicture.asset(
-                  "lib/special/base_citenco/asset/image/close.svg",
+                  "lib/base_citenco/asset/image/close.svg",
                 ),
                 height: BasePKG().convert(16),
                 width: BasePKG().convert(16),

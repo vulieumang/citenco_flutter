@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/cutenco.iml" filepath="$PROJECT_DIR$/cutenco.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android/cutenco_android.iml" filepath="$PROJECT_DIR$/android/cutenco_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/citenco.iml" filepath="$PROJECT_DIR$/citenco.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/citenco_android.iml" filepath="$PROJECT_DIR$/android/citenco_android.iml" />
     </modules>
   </component>
 </project>

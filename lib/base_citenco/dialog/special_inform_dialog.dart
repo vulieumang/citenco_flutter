@@ -38,7 +38,7 @@ class SpecialInformDialog extends StatelessWidget {
       String? title,
       Widget? contentWidget,
       String? buttonContent}) async {
-    String iconPath = "lib/special/base_citenco/asset/image/close.svg";
+    String iconPath = "lib/base_citenco/asset/image/close.svg";
     if (state.mounted)
       return await showDialog(
           barrierDismissible: false,
