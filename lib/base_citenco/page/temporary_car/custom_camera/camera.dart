@@ -2,11 +2,11 @@ import 'package:camera/camera.dart';
 import 'package:cnvsoft/base_citenco/package/package.dart';
 import 'package:cnvsoft/base_citenco/page/temporary_car/custom_camera/camera_provider.dart';
 import 'package:cnvsoft/core/base_core/base_appbar.dart';
-import 'package:cnvsoft/core/base_core/data_mix.dart'; 
+import 'package:cnvsoft/core/base_core/data_mix.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:cnvsoft/core/base_core/base_provider.dart'; 
+import 'package:cnvsoft/core/base_core/base_provider.dart';
 import 'package:cnvsoft/core/base_core/base_page.dart';
 
 enum CameraScreenType { TakeImage, Capturebill, EditImage, Video }
@@ -132,15 +132,17 @@ class CameraScreenState extends BasePage<CameraScreen, CameraProvider>
                 : Container(),
           ),
           Expanded(
-              child: GestureDetector(
-            onTap: provider.captureImage,
-            child: Container(
-              width: 50,
-              height: 50,
-              child: SvgPicture.asset(
-                  "lib/base_citenco/asset/image/camera_alt.svg"),
-            ),
-          )),
+              child: Consumer<CheckClickNotifier>(builder: (context, click, _) {
+            return GestureDetector(
+              onTap: click.value! ? null : provider.captureImage,
+              child: Container(
+                width: 50,
+                height: 50,
+                child: SvgPicture.asset(
+                    "lib/base_citenco/asset/image/camera_alt.svg"),
+              ),
+            );
+          })),
           Expanded(child: Container())
         ],
       ),

@@ -4,7 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:cnvsoft/base_citenco/package/package.dart';
 import 'package:cnvsoft/base_citenco/page/temporary_car/custom_camera/camera.dart';
 import 'package:cnvsoft/core/base_core/base_notifier.dart';
-import 'package:cnvsoft/core/base_core/base_provider.dart'; 
+import 'package:cnvsoft/core/base_core/base_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -20,7 +20,7 @@ class CameraProvider extends BaseProvider<CameraScreenState> {
 
   final CheckHaveCameraNotifier _checkHaveCameraNotifier =
       CheckHaveCameraNotifier();
-
+  final CheckClickNotifier _checkClickNotifier = CheckClickNotifier();
   @override
   void onReady(callback) {
     super.onReady(callback);
@@ -28,7 +28,8 @@ class CameraProvider extends BaseProvider<CameraScreenState> {
   }
 
   @override
-  List<BaseNotifier> initNotifiers() => [_checkHaveCameraNotifier];
+  List<BaseNotifier> initNotifiers() =>
+      [_checkHaveCameraNotifier, _checkClickNotifier];
 
   String timestamp() => DateTime.now().millisecondsSinceEpoch.toString();
 
@@ -46,20 +47,21 @@ class CameraProvider extends BaseProvider<CameraScreenState> {
   }
 
   captureImage() async {
-    print('_captureImage');
     if (controller!.value.isInitialized) {
       SystemSound.play(SystemSoundType.click);
+      _checkClickNotifier.value = true;
       XFile imageFile = await controller!.takePicture();
-      Navigator.of(context!).pushNamed("gallery_capture",
-          arguments: {"imagePath": imageFile.path, "type": state.widget.type});
+      Navigator.of(context!).pushNamed("gallery_capture", arguments: {
+        "imagePath": imageFile.path,
+        "type": state.widget.type
+      }).then((value) => _checkClickNotifier.value = false);
     }
   }
 
   accessGallery() async {
     var image = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (image != null) {
-      // var result =
-      await Navigator.of(context!).pushNamed("gallery_capture",
+      var result = await Navigator.of(context!).pushNamed("gallery_capture",
           arguments: {"imagePath": image.path, "type": state.widget.type});
       // if (result != null) {
       //   var _imageRotate = await rotateImage(result);
@@ -98,6 +100,15 @@ class CameraProvider extends BaseProvider<CameraScreenState> {
   void _showCameraException(CameraException e) {
     state.logError(e.code, e.description);
     state.showInSnackBar('Error: ${e.code}\n${e.description}');
+  }
+}
+
+class CheckClickNotifier extends BaseNotifier<bool> {
+  CheckClickNotifier() : super(false);
+
+  @override
+  ListenableProvider provider() {
+    return ChangeNotifierProvider<CheckClickNotifier>(create: (_) => this);
   }
 }
 

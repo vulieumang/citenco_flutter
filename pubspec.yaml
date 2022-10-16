@@ -58,7 +58,7 @@ dependencies:
   image_cropper: 1.4.1
   shimmer: 2.0.0
   transparent_image: 2.0.0
-  camera: 0.8.1+7
+  camera: 0.10.0+3
   dart_ipify: 1.1.0
   country_code_picker: 2.0.2
   simple_logger: 1.8.1

@@ -40,13 +40,16 @@ class TemporaryCarProvider extends BaseProvider<TemporaryCarPageState>
         ..url = item.path
         ..isDefault = false);
     }
-    await Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => ReviewImage(
-                images: image,
-              )),
-    );
+    var _result = await Navigator.of(context!).pushNamed(
+        "camera_screen_takeimage",
+        arguments: {"access_gallery": true});
+    if (_result != null && _result is String) {
+      loading(() async {
+        var _imageRotate = await rotateImage(_result);
+        // await addImage(_imageRotate);
+        // _imageReview.value = _imageReview.value! + 1;
+      });
+    }
   }
 
   @override
