@@ -49,163 +49,166 @@ class InfoCarPageState extends BasePage<InfoCarPage, InfoCarProvider>
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            "Kiểm tra xe có đúng thông tin dưới đây trước khi cho vô trạm: ",
-            style: BasePKG().text!.captionLowerNormal(),
-            textAlign: TextAlign.start,
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          Row(
-            children: [
-              Text(
-                "Tên tài xế: ${provider.state.widget.data!.vehicleDriverName}",
-                style: BasePKG().text!.captionLowerNormal(),
-                textAlign: TextAlign.start,
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          Text(
-            "Biển số: ${provider.state.widget.data!.vehicleLicensePlate}",
-            style: BasePKG().text!.captionLowerNormal(),
-            textAlign: TextAlign.start,
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          Text(
-            "Loại xe:  ${provider.state.widget.data!.vehicleType}",
-            style: BasePKG().text!.captionLowerNormal(),
-            textAlign: TextAlign.start,
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          Text(
-            "Tải trọng:  ${provider.state.widget.data!.vehicleLoad} KG",
-            style: BasePKG().text!.captionLowerNormal(),
-            textAlign: TextAlign.start,
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          Text(
-            "Số lần đã vô  ${provider.state.widget.data!.count}/${provider.state.widget.data!.dailyLimit}",
-            style: BasePKG().text!.captionLowerNormal(),
-            textAlign: TextAlign.start,
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          Text(
-            "Địa chỉ xác nhận: ${provider.state.widget.data!.vehicleVerifiedBy}",
-            style: BasePKG().text!.captionLowerNormal(),
-            textAlign: TextAlign.start,
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          Text(
-            "Hợp tác xã:  ${provider.state.widget.data!.vehicleCollectionUnitName}",
-            style: BasePKG().text!.captionLowerNormal(),
-            textAlign: TextAlign.start,
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          Text(
-            "Hình ảnh",
-            style: BasePKG().text!.captionLowerNormal(),
-            textAlign: TextAlign.start,
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          Container(
-              width: size.width - 80,
-              child: _imagesPicker(provider.state.widget.data!.images!)),
-          SizedBox(
-            height: 16,
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Consumer<OnCheckNotifier>(builder: (context, checked, _) {
-                return Checkbox(
-                    value: checked.value!,
-                    onChanged: (value) => provider.onChangCheck());
-              }),
-              Expanded(
-                child: Text(
-                  "Tôi cam kết các thông tin khai báo là đúng sự thật và hoàn toàn chịu trách nhiệm trước pháp luật về tính xác thực của thông tin.",
-                  style: BasePKG().text!.normalLowerNormal(),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              "Kiểm tra xe có đúng thông tin dưới đây trước khi cho vô trạm: ",
+              style: BasePKG().text!.captionLowerNormal(),
+              textAlign: TextAlign.start,
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Row(
+              children: [
+                Text(
+                  "Tên tài xế: ${provider.state.widget.data!.vehicleDriverName}",
+                  style: BasePKG().text!.captionLowerNormal(),
                   textAlign: TextAlign.start,
                 ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (StorageCNV().containsKey("AddVehicleHistoryOverLimitation") &&
-                  StorageCNV().getInt("AddVehicleHistoryOverLimitation") ==
-                      3) ...[
-                GestureDetector(
-                  onTap: provider.submitSend,
-                  child: Container(
-                    width: 330,
-                    decoration: BoxDecoration(
-                        color: Color(0xff0474C4),
-                        borderRadius: BorderRadius.circular(10)),
-                    alignment: Alignment.center,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 5),
-                      child: Text(
-                        "Xác nhận cho vô quá số lần quy định",
-                        style: BasePKG()
-                            .text!
-                            .captionBold()
-                            .copyWith(color: Colors.white),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
+              ],
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Text(
+              "Biển số: ${provider.state.widget.data!.vehicleLicensePlate}",
+              style: BasePKG().text!.captionLowerNormal(),
+              textAlign: TextAlign.start,
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Text(
+              "Loại xe:  ${provider.state.widget.data!.vehicleType}",
+              style: BasePKG().text!.captionLowerNormal(),
+              textAlign: TextAlign.start,
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Text(
+              "Tải trọng:  ${provider.state.widget.data!.vehicleLoad} KG",
+              style: BasePKG().text!.captionLowerNormal(),
+              textAlign: TextAlign.start,
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Text(
+              "Số lần đã vô  ${provider.state.widget.data!.count}/${provider.state.widget.data!.dailyLimit}",
+              style: BasePKG().text!.captionLowerNormal(),
+              textAlign: TextAlign.start,
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Text(
+              "Địa chỉ xác nhận: ${provider.state.widget.data!.vehicleVerifiedBy}",
+              style: BasePKG().text!.captionLowerNormal(),
+              textAlign: TextAlign.start,
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Text(
+              "Hợp tác xã:  ${provider.state.widget.data!.vehicleCollectionUnitName}",
+              style: BasePKG().text!.captionLowerNormal(),
+              textAlign: TextAlign.start,
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Text(
+              "Hình ảnh",
+              style: BasePKG().text!.captionLowerNormal(),
+              textAlign: TextAlign.start,
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Container(
+                width: size.width - 80,
+                child: _imagesPicker(provider.state.widget.data!.images!)),
+            SizedBox(
+              height: 16,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Consumer<OnCheckNotifier>(builder: (context, checked, _) {
+                  return Checkbox(
+                      value: checked.value!,
+                      onChanged: (value) => provider.onChangCheck());
+                }),
+                Expanded(
+                  child: Text(
+                    "Tôi cam kết các thông tin khai báo là đúng sự thật và hoàn toàn chịu trách nhiệm trước pháp luật về tính xác thực của thông tin.",
+                    style: BasePKG().text!.normalLowerNormal(),
+                    textAlign: TextAlign.start,
                   ),
                 ),
-              ] else
-                GestureDetector(
-                  onTap: provider.submitSend,
-                  child: Container(
-                    width: 200,
-                    decoration: BoxDecoration(
-                        color: BasePKG().color.primaryColor,
-                        borderRadius: BorderRadius.circular(10)),
-                    alignment: Alignment.center,
+              ],
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (StorageCNV()
+                        .containsKey("AddVehicleHistoryOverLimitation") &&
+                    StorageCNV().getInt("AddVehicleHistoryOverLimitation") ==
+                        3) ...[
+                  GestureDetector(
+                    onTap: provider.submitSend,
                     child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 5),
-                      child: Text("Xác nhận",
+                      width: 330,
+                      decoration: BoxDecoration(
+                          color: Color(0xff0474C4),
+                          borderRadius: BorderRadius.circular(10)),
+                      alignment: Alignment.center,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(vertical: 5),
+                        child: Text(
+                          "Xác nhận cho vô quá số lần quy định",
                           style: BasePKG()
                               .text!
                               .captionBold()
-                              .copyWith(color: Colors.white)),
+                              .copyWith(color: Colors.white),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-            ],
-          )
-        ],
+                ] else
+                  GestureDetector(
+                    onTap: provider.submitSend,
+                    child: Container(
+                      width: 200,
+                      decoration: BoxDecoration(
+                          color: BasePKG().color.primaryColor,
+                          borderRadius: BorderRadius.circular(10)),
+                      alignment: Alignment.center,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(vertical: 5),
+                        child: Text("Xác nhận",
+                            style: BasePKG()
+                                .text!
+                                .captionBold()
+                                .copyWith(color: Colors.white)),
+                      ),
+                    ),
+                  ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
