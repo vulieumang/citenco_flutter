@@ -18,7 +18,6 @@ import 'package:cnvsoft/base_citenco/page/home/home_icon.dart';
 import 'package:cnvsoft/base_citenco/page/error/error_list/error_list_page.dart';
 import 'package:cnvsoft/base_citenco/page/error/error_page.dart';
 import 'package:cnvsoft/base_citenco/page/landing/landing_page.dart';
-import 'package:cnvsoft/base_citenco/page/webView2/web_view_core/web_page.dart';
 import 'package:cnvsoft/base_citenco/view/square_button.dart';
 import 'package:cnvsoft/base_citenco/modify/package.dart';
 import 'package:flutter/material.dart';
@@ -111,7 +110,6 @@ class BasePKG extends BasePackage {
       "info_car_page": (arg) => InfoCarPage(
             data: arg["data"],
           ),
-      "web2": (arg) => FeedBackWebPage(urlView: dataOf(() => arg["url"])),
       "camera_screen_takeimage": (arg) => CameraScreen.takeimage(
             titleAppbar: dataOf(() => arg["title_appbar"], null),
             accessGallery: boolOf(() => arg["access_gallery"]),
