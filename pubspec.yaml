@@ -62,9 +62,7 @@ dependencies:
   flutter_spinkit: 5.0.0 
   tiengviet: 0.5.0 
   pretty_json: 2.0.0
-  html_character_entities: 1.0.0+1
-  uni_links: 
-  flutter_inappwebview: 5.3.2
+  html_character_entities: 1.0.0+1 
   simple_tooltip: 1.0.0 
   cupertino_icons: ^1.0.3 
   

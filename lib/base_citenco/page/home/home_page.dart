@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cnvsoft/base_citenco/view/square_button.dart';
 import 'package:cnvsoft/core/base_core/base_appbar.dart';
 import 'package:cnvsoft/core/base_core/data_mix.dart';
@@ -27,24 +29,27 @@ class _HomePageState extends BasePage<HomePage, HomeProvider> with DataMix {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Container(
-                      child: Text(
-                        "CÔNG TY TNHH MTV MÔI TRƯỜNG ĐÔ THỊ TPHCM",
-                        style: BasePKG()
-                            .text!
-                            .normalNormal()
-                            .copyWith(color: Colors.white),
-                        maxLines: 2,
-                        textAlign: TextAlign.center,
+              Container(
+                padding: EdgeInsets.only(top: (Platform.isIOS) ? 15 : 0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        child: Text(
+                          "CÔNG TY TNHH MTV MÔI TRƯỜNG ĐÔ THỊ TPHCM",
+                          style: BasePKG()
+                              .text!
+                              .normalNormal()
+                              .copyWith(color: Colors.white),
+                          maxLines: 2,
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               Container(
                 child: Text(
