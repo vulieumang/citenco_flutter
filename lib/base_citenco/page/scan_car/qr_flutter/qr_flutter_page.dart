@@ -114,7 +114,7 @@ class QrFlutterPageState extends BasePage<QrFlutterPage, QrFlutterProvider> {
 
   @override
   void didUpdateWidget(QrFlutterPage oldWidget) {
-    super.didUpdateWidget(oldWidget); 
+    super.didUpdateWidget(oldWidget);
     // if (BasePKG().boolOf(() =>
     //     widget.resumeCamera != null &&
     //     oldWidget.resumeCamera != widget.resumeCamera)) {

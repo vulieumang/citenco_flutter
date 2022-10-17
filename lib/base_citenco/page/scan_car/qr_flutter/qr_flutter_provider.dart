@@ -138,6 +138,9 @@ class QrFlutterProvider extends BaseProvider<QrFlutterPageState> {
             qrViewController.resumeCamera();
             _countDown.value = 60;
           });
+        } else {
+          qrViewController.resumeCamera();
+          _countDown.value = 60;
         }
         hideLoading();
       }
