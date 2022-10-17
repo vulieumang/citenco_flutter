@@ -9,7 +9,7 @@ import 'package:cnvsoft/global.dart';
 import 'package:cnvsoft/base_citenco/package/translation.dart';
 import 'package:dio/dio.dart';
 import 'package:event_bus/event_bus.dart';
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -40,16 +40,15 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await StorageCNV().init();
   StorageCNV().setBool("IS_APPLE", false);
-  if(!StorageCNV().containsKey("APP_ACP_VERSION"))
-  StorageCNV().setDefault();
+  if (!StorageCNV().containsKey("APP_ACP_VERSION")) StorageCNV().setDefault();
   // await StorageCNV().clearStorageCNV();
 
   Config.initial();
-  Translations().supports = [Locale("vi", "VN"), Locale("en", "US")]; 
+  Translations().supports = [Locale("vi", "VN"), Locale("en", "US")];
   Config.intialAsset();
   runZonedGuarded(
-    () { 
-      Firebase.initializeApp();
+    () {
+      // Firebase.initializeApp();
       runApp(App(title: Config.title));
 
       Logger.root.level = kDebugMode ? Level.ALL : Level.OFF;
@@ -66,7 +65,6 @@ void main() async {
           FlutterError.dumpErrorToConsole(details, forceReport: forceReport);
         }
       };
-      
     },
     (error, stackTrace) async {
       if (!(error is SocketException) &&
@@ -105,17 +103,33 @@ class AppState extends State<App> {
     Config.config();
     Connection().init();
 
-    _locale = (StorageCNV().containsKey("TRANSLATION_APP")) ? StorageCNV().getString("TRANSLATION_APP") == "vi"? Locale("vi", "VN") :Locale("en", "US"):  Locale("vi", "VN");
-    Translations().locale  = (StorageCNV().containsKey("TRANSLATION_APP")) ? StorageCNV().getString("TRANSLATION_APP") == "vi"? Locale("vi", "VN") :Locale("en", "US"):  Locale("vi", "VN");
+    _locale = (StorageCNV().containsKey("TRANSLATION_APP"))
+        ? StorageCNV().getString("TRANSLATION_APP") == "vi"
+            ? Locale("vi", "VN")
+            : Locale("en", "US")
+        : Locale("vi", "VN");
+    Translations().locale = (StorageCNV().containsKey("TRANSLATION_APP"))
+        ? StorageCNV().getString("TRANSLATION_APP") == "vi"
+            ? Locale("vi", "VN")
+            : Locale("en", "US")
+        : Locale("vi", "VN");
 
     App._bus.on().listen((event) {
       if (event == "restart") {
         StorageCNV().remove("HELP");
-        setState(() { 
+        setState(() {
           Config.config();
-         _locale = (StorageCNV().containsKey("TRANSLATION_APP")) ? StorageCNV().getString("TRANSLATION_APP") == "vi"? Locale("vi", "VN") :Locale("en", "US"):  Locale("vi", "VN");
-        Translations().locale  = (StorageCNV().containsKey("TRANSLATION_APP")) ? StorageCNV().getString("TRANSLATION_APP") == "vi"? Locale("vi", "VN") :Locale("en", "US"):  Locale("vi", "VN");
-          Config.routeObserver = RouteObserver<PageRoute>(); 
+          _locale = (StorageCNV().containsKey("TRANSLATION_APP"))
+              ? StorageCNV().getString("TRANSLATION_APP") == "vi"
+                  ? Locale("vi", "VN")
+                  : Locale("en", "US")
+              : Locale("vi", "VN");
+          Translations().locale = (StorageCNV().containsKey("TRANSLATION_APP"))
+              ? StorageCNV().getString("TRANSLATION_APP") == "vi"
+                  ? Locale("vi", "VN")
+                  : Locale("en", "US")
+              : Locale("vi", "VN");
+          Config.routeObserver = RouteObserver<PageRoute>();
         });
       }
     });
@@ -160,8 +174,7 @@ class AppState extends State<App> {
       "name": settings.name,
       "arguments": settings.arguments,
     });
-    if (["dash_board"]
-        .contains(settings.name)) {
+    if (["dash_board"].contains(settings.name)) {
       return PageRouteBuilder(
           settings: settings,
           pageBuilder: (context, animation, secondaryAnimation) => _screen,

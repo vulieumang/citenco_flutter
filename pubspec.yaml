@@ -33,11 +33,7 @@ dependencies:
   http_extensions: 1.0.0 
   url_launcher: 6.0.9 
   webview_flutter: 2.0.10
-  flutter_svg: 0.22.0
-  firebase_auth: 3.0.1
-  firebase_core: 1.4.0
-  firebase_messaging: 10.0.4
-  flutter_local_notifications: 9.3.2
+  flutter_svg: 0.22.0  
   device_info: 2.0.2 
   dio: 4.0.0 
   connectivity: 3.0.6
@@ -62,18 +58,14 @@ dependencies:
   dart_ipify: 1.1.0
   country_code_picker: 2.0.2
   simple_logger: 1.8.1
-  android_intent: 2.0.2 
-  flutter_social_content_share: 1.0.1
-  flutter_spinkit: 5.0.0
-  smooth_page_indicator: 0.3.0-nullsafety.0
+  android_intent: 2.0.2  
+  flutter_spinkit: 5.0.0 
   tiengviet: 0.5.0 
   pretty_json: 2.0.0
   html_character_entities: 1.0.0+1
   uni_links: 
   flutter_inappwebview: 5.3.2
-  simple_tooltip: 1.0.0
-  share: ^2.0.4  
-  flutter_share: 2.0.0
+  simple_tooltip: 1.0.0 
   cupertino_icons: ^1.0.3 
   
 dev_dependencies:
