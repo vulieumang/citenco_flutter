@@ -19,6 +19,8 @@ class QrFlutterProvider extends BaseProvider<QrFlutterPageState> {
   final PermissionStatusNotifier _permissionStatus = PermissionStatusNotifier();
   final CountDownNotifier _countDown = CountDownNotifier(60);
 
+  TextEditingController idController = TextEditingController();
+
   QRViewController? qrViewController;
   bool isOpenedSettings = false;
 
@@ -84,6 +86,26 @@ class QrFlutterProvider extends BaseProvider<QrFlutterPageState> {
         }
       }
     }
+  }
+
+  onScanQR() async {
+    showLoading();
+    var res;
+    if (idController.text.isNotEmpty) {
+      qrViewController!.pauseCamera();
+      res = await BasePKG.of(state).scan(id: idController.text);
+    }
+    if (res.data.code == 200) {
+      await Navigator.of(state.context).pushNamed("info_car_page",
+          arguments: {"data": res.data.data}).then((value) {
+        qrViewController!.resumeCamera();
+        _countDown.value = 60;
+      });
+    } else {
+      qrViewController!.resumeCamera();
+      _countDown.value = 60;
+    }
+    hideLoading();
   }
 
   onQRViewCreated(QRViewController qrViewController) {

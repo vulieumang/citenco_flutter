@@ -1,6 +1,7 @@
 import 'package:cnvsoft/base_citenco/package/package.dart';
 import 'package:cnvsoft/base_citenco/package/trans.dart';
 import 'package:cnvsoft/base_citenco/page/scan_car/qr_flutter/qr_flutter_provider.dart';
+import 'package:cnvsoft/base_citenco/view/text_field.dart';
 import 'package:cnvsoft/core/base_core/base_appbar.dart';
 import 'package:cnvsoft/core/base_core/base_page.dart';
 import 'package:flutter/material.dart';
@@ -115,11 +116,6 @@ class QrFlutterPageState extends BasePage<QrFlutterPage, QrFlutterProvider> {
   @override
   void didUpdateWidget(QrFlutterPage oldWidget) {
     super.didUpdateWidget(oldWidget);
-    // if (BasePKG().boolOf(() =>
-    //     widget.resumeCamera != null &&
-    //     oldWidget.resumeCamera != widget.resumeCamera)) {
-    // provider.onOpenCamera(true);
-    // }
   }
 
   @override
@@ -129,128 +125,120 @@ class QrFlutterPageState extends BasePage<QrFlutterPage, QrFlutterProvider> {
 
   @override
   Widget body() {
-    return Consumer<PermissionStatusNotifier>(builder: (context, value, child) {
-      return value.value != PermissionStatus.granted
-          ? _permisstionFalse()
-          : _showScanCamera();
-    });
-  }
-
-  Widget _permisstionFalse() {
-    return Column(children: <Widget>[
-      Expanded(
-          child: GestureDetector(
-        onTap: () => provider.showPermissionRequest(),
-        child: Container(
-          width: double.infinity,
-          color: BasePKG().color.accentColor,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(BaseTrans().$permissionCamera,
-                  style: BasePKG().text!.smallUpperNormal()),
-              // Text(QrFlutterTrans().$permisstionMess1,
-              //     style: QrFlutterPKG().text.smallUpperNormal()),
-            ],
-          ),
-        ),
-      )),
-    ]);
-  }
-
-  Widget _showScanCamera() {
     return Container(
       height: size.height,
-      child: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          Image.asset(
-            "lib/base_citenco/asset/image/bg_home_bottom.png",
-            width: size.width,
-          ),
-          Container(
-            height: size.height,
-            child: Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text(
-                    "Bạn vui lòng tìm có QR Code Xe. Sau đó quay hình vào màn hình có camera quét tự động.",
-                    style: BasePKG()
-                        .text!
-                        .largeNormal()
-                        .copyWith(color: Colors.black.withOpacity(.7)),
-                    textAlign: TextAlign.center,
-                  ),
-                  Container(
-                    height: 250,
-                    width: 250,
-                    child: QRView(
-                      key: provider.qrKey,
-                      onQRViewCreated: provider.onQRViewCreated,
-                      formatsAllowed: [
-                        BarcodeFormat.codabar,
-                        BarcodeFormat.code39,
-                        BarcodeFormat.code93,
-                        BarcodeFormat.code128,
-                        BarcodeFormat.ean8,
-                        BarcodeFormat.ean13,
-                        BarcodeFormat.itf,
-                        BarcodeFormat.rss14,
-                        BarcodeFormat.rssExpanded,
-                        BarcodeFormat.upcA,
-                        BarcodeFormat.upcE,
-                        BarcodeFormat.upcEanExtension,
-                      ],
-                      overlay: QrScannerOverlayShape(
-                        borderColor: Color(0xffE8E1E1),
-                        borderRadius: 30,
-                        borderLength: 130,
-                        borderWidth: 13,
-                        overlayColor: Colors.white,
+      child: SingleChildScrollView(
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            Image.asset(
+              "lib/base_citenco/asset/image/bg_home_bottom.png",
+              width: size.width,
+            ),
+            Container(
+              height: size.height - 150,
+              child: Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      "Bạn vui lòng tìm có QR Code Xe. Sau đó quay hình vào màn hình có camera quét tự động.",
+                      style: BasePKG()
+                          .text!
+                          .largeNormal()
+                          .copyWith(color: Colors.black.withOpacity(.7)),
+                      textAlign: TextAlign.center,
+                    ),
+                    Container(
+                      height: 250,
+                      width: 250,
+                      child: QRView(
+                        key: provider.qrKey,
+                        onQRViewCreated: provider.onQRViewCreated,
+                        formatsAllowed: [
+                          BarcodeFormat.codabar,
+                          BarcodeFormat.code39,
+                          BarcodeFormat.code93,
+                          BarcodeFormat.code128,
+                          BarcodeFormat.ean8,
+                          BarcodeFormat.ean13,
+                          BarcodeFormat.itf,
+                          BarcodeFormat.rss14,
+                          BarcodeFormat.rssExpanded,
+                          BarcodeFormat.upcA,
+                          BarcodeFormat.upcE,
+                          BarcodeFormat.upcEanExtension,
+                        ],
+                        overlay: QrScannerOverlayShape(
+                          borderColor: Color(0xffE8E1E1),
+                          borderRadius: 30,
+                          borderLength: 130,
+                          borderWidth: 13,
+                          overlayColor: Colors.white,
+                        ),
                       ),
                     ),
-                  ),
-                  Container(
-                      padding: EdgeInsets.symmetric(vertical: 15),
-                      margin: EdgeInsets.symmetric(
-                        horizontal: 40,
-                      ),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: Color(0xffD1E0ED),
-                          borderRadius: BorderRadius.circular(15)),
-                      child: Consumer<CountDownNotifier>(
-                          builder: (context, count, _) {
-                        return RichText(
-                            text: TextSpan(
-                                text: "Quét QRCode (",
-                                style: BasePKG()
-                                    .text!
-                                    .captionNormal()
-                                    .copyWith(color: Color(0xff004D99)),
-                                children: [
-                                  TextSpan(
-                                      text: count.value.toString(),
-                                      style: BasePKG()
-                                          .text!
-                                          .captionNormal()
-                                          .copyWith(color: Color(0xff004D99))),
-                                  TextSpan(
-                                      text: ")",
-                                      style: BasePKG()
-                                          .text!
-                                          .captionNormal()
-                                          .copyWith(color: Color(0xff004D99)))
-                                ]),
-                            textAlign: TextAlign.center);
-                      })),
-                ],
+                    Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(vertical: 16),
+                          child: TextFieldCustom(
+                            controller: provider.idController,
+                            nameField: "Nhập mã",
+                            onSubmit: (data) {
+                              provider.onScanQR();
+                            },
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: provider.onScanQR,
+                          child: Container(
+                              padding: EdgeInsets.symmetric(vertical: 15),
+                              margin: EdgeInsets.symmetric(
+                                horizontal: 40,
+                              ),
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  color: Color(0xffD1E0ED),
+                                  borderRadius: BorderRadius.circular(15)),
+                              child: Consumer<CountDownNotifier>(
+                                  builder: (context, count, _) {
+                                return RichText(
+                                    text: TextSpan(
+                                        text: "Quét QRCode (",
+                                        style: BasePKG()
+                                            .text!
+                                            .captionNormal()
+                                            .copyWith(color: Color(0xff004D99)),
+                                        children: [
+                                          TextSpan(
+                                              text: count.value.toString(),
+                                              style: BasePKG()
+                                                  .text!
+                                                  .captionNormal()
+                                                  .copyWith(
+                                                      color:
+                                                          Color(0xff004D99))),
+                                          TextSpan(
+                                              text: ")",
+                                              style: BasePKG()
+                                                  .text!
+                                                  .captionNormal()
+                                                  .copyWith(
+                                                      color: Color(0xff004D99)))
+                                        ]),
+                                    textAlign: TextAlign.center);
+                              })),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

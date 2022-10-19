@@ -164,7 +164,9 @@ class InfoCarPageState extends BasePage<InfoCarPage, InfoCarProvider>
                 if (StorageCNV()
                         .containsKey("AddVehicleHistoryOverLimitation") &&
                     StorageCNV().getInt("AddVehicleHistoryOverLimitation") ==
-                        3) ...[
+                        3 &&
+                    provider.state.widget.data!.count ==
+                        provider.state.widget.data!.dailyLimit) ...[
                   GestureDetector(
                     onTap: provider.submitSend,
                     child: Container(
@@ -206,6 +208,9 @@ class InfoCarPageState extends BasePage<InfoCarPage, InfoCarProvider>
                     ),
                   ),
               ],
+            ),
+            SizedBox(
+              height: 80,
             )
           ],
         ),
