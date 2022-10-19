@@ -36,9 +36,6 @@ class LoginProvider extends BaseProvider<LoginPageState> {
   @override
   Future<void> onReady(callback) async {
     LevelAsset().initialize();
-    Future.delayed(Duration(seconds: 1), () {
-      loginBySaved();
-    });
   }
 
   @override
@@ -87,8 +84,6 @@ class LoginProvider extends BaseProvider<LoginPageState> {
       _checkPhoneNotifier.value = true;
     }
   }
-
-  void loginBySaved() async {}
 }
 
 class CheckPassNotifier extends BaseNotifier<bool> {
@@ -110,7 +105,7 @@ class CheckPhoneNotifier extends BaseNotifier<bool> {
 }
 
 class ChangeShowPassNotifier extends BaseNotifier<bool> {
-  ChangeShowPassNotifier() : super(false);
+  ChangeShowPassNotifier() : super(true);
 
   @override
   ListenableProvider<Listenable?> provider() {

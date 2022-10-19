@@ -282,6 +282,7 @@ class Http with DataMix {
                 requestOptions: RequestOptions(path: path)))
         .catchError((error) {
       _catchError(error, path);
+
       if (error is DioError) {
         return Response(
             data: error.response?.data,
@@ -588,20 +589,11 @@ class Http with DataMix {
           result.error = _json;
           var info = await PackageInfo.fromPlatform();
           var currentVersion = "${info.version}_${info.buildNumber}";
-          Log().bot(state!,
-              content: "Log API Error ${Config.title}:",
-              title: "Error: ${result.statusCode}",
-              isError: true,
-              data: {
-                "api": baseUrl + url,
-                "header": _baseHeader(),
-                "params": params,
-                "body": bodies,
-                "error": result.error,
-                "reason": reasonPhrase,
-                "app_version": currentVersion,
-                "env": BasePKG().env?.env
-              });
+          MessageDialog.show(
+            state!,
+            "Lỗi api ${result.statusCode}",
+            "Thông báo",
+          );
         }
         if (statusCode == HttpStatus.unauthorized) {
           if (!PackageManager().requiredLogout && !MyProfile().isGuest) {

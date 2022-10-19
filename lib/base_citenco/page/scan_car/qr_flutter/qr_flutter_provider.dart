@@ -14,7 +14,7 @@ typedef BarcodeValueCallback(Barcode scanData);
 class QrFlutterProvider extends BaseProvider<QrFlutterPageState> {
   QrFlutterProvider(QrFlutterPageState state) : super(state);
 
-  final GlobalKey _qrKey = GlobalKey();
+  final GlobalKey _qrKey = GlobalKey(debugLabel: "QR");
   final GlobalKey _containerKey = GlobalKey();
   final PermissionStatusNotifier _permissionStatus = PermissionStatusNotifier();
   final CountDownNotifier _countDown = CountDownNotifier(60);
@@ -25,12 +25,10 @@ class QrFlutterProvider extends BaseProvider<QrFlutterPageState> {
   GlobalKey get qrKey => _qrKey;
   GlobalKey get containerKey => _containerKey;
   bool get allowCamera => _permissionStatus.value == PermissionStatus.granted;
-  var open;
 
   @override
   Future<void> onReady(callback) async {
     super.onReady(callback);
-    open = 1;
     await refreshCameraPermission();
     if (!allowCamera) showPermissionRequest(false);
     startCountDown();
@@ -51,6 +49,7 @@ class QrFlutterProvider extends BaseProvider<QrFlutterPageState> {
   void startCountDown([int? initSeconds]) {
     Timer.periodic(Duration(seconds: 1), (_) {
       if (state.mounted) {
+        if (_countDown.value == 0) Navigator.of(state.context);
         if (_countDown.value != 0) _countDown.value = _countDown.value! - 1;
       }
     });
@@ -60,42 +59,6 @@ class QrFlutterProvider extends BaseProvider<QrFlutterPageState> {
     openCamera
         ? await qrViewController?.resumeCamera()
         : await qrViewController?.pauseCamera();
-  }
-
-  List<BarcodeFormat> get formatsAllowed {
-    List<BarcodeFormat> _formatsAllowed = [];
-    switch (state.widget.qrFlutterScanType) {
-      case QrFlutterScanType.QRCODE:
-        _formatsAllowed = [
-          BarcodeFormat.qrcode,
-          BarcodeFormat.aztec,
-          BarcodeFormat.dataMatrix,
-          BarcodeFormat.maxicode,
-          BarcodeFormat.pdf417
-        ];
-        break;
-      case QrFlutterScanType.BARCODE:
-        _formatsAllowed = [
-          BarcodeFormat.codabar,
-          BarcodeFormat.code39,
-          BarcodeFormat.code93,
-          BarcodeFormat.code128,
-          BarcodeFormat.ean8,
-          BarcodeFormat.ean13,
-          BarcodeFormat.itf,
-          BarcodeFormat.rss14,
-          BarcodeFormat.rssExpanded,
-          BarcodeFormat.upcA,
-          BarcodeFormat.upcE,
-          BarcodeFormat.upcEanExtension,
-        ];
-        break;
-      default:
-        _formatsAllowed = [];
-        break;
-    }
-
-    return _formatsAllowed;
   }
 
   Future<void> postRequestCamera() async {
@@ -125,7 +88,7 @@ class QrFlutterProvider extends BaseProvider<QrFlutterPageState> {
 
   onQRViewCreated(QRViewController qrViewController) {
     this.qrViewController = qrViewController;
-    qrViewController.resumeCamera();
+    qrViewController.scanInvert(true);
     qrViewController.scannedDataStream.listen((scanData) async {
       if (scanData.code != "") {
         showLoading();

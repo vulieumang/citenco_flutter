@@ -189,7 +189,20 @@ class QrFlutterPageState extends BasePage<QrFlutterPage, QrFlutterProvider> {
                     child: QRView(
                       key: provider.qrKey,
                       onQRViewCreated: provider.onQRViewCreated,
-                      formatsAllowed: provider.formatsAllowed,
+                      formatsAllowed: [
+                        BarcodeFormat.codabar,
+                        BarcodeFormat.code39,
+                        BarcodeFormat.code93,
+                        BarcodeFormat.code128,
+                        BarcodeFormat.ean8,
+                        BarcodeFormat.ean13,
+                        BarcodeFormat.itf,
+                        BarcodeFormat.rss14,
+                        BarcodeFormat.rssExpanded,
+                        BarcodeFormat.upcA,
+                        BarcodeFormat.upcE,
+                        BarcodeFormat.upcEanExtension,
+                      ],
                       overlay: QrScannerOverlayShape(
                         borderColor: Color(0xffE8E1E1),
                         borderRadius: 30,
