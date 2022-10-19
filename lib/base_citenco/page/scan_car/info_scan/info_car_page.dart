@@ -54,10 +54,13 @@ class InfoCarPageState extends BasePage<InfoCarPage, InfoCarProvider>
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-              "Kiểm tra xe có đúng thông tin dưới đây trước khi cho vô trạm: ",
-              style: BasePKG().text!.captionLowerNormal(),
-              textAlign: TextAlign.start,
+            Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: Text(
+                "Kiểm tra xe có đúng thông tin dưới đây trước khi cho vô trạm: ",
+                style: BasePKG().text!.captionLowerNormal(),
+                textAlign: TextAlign.start,
+              ),
             ),
             SizedBox(
               height: 16,

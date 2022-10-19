@@ -4,11 +4,13 @@
 
 import 'dart:convert';
 
+import 'package:cnvsoft/core/base_core/base_model.dart';
+
 DataScan dataScanFromJson(String str) => DataScan.fromJson(json.decode(str));
 
 String dataScanToJson(DataScan data) => json.encode(data.toJson());
 
-class DataScan {
+class DataScan extends BaseModel {
   DataScan({
     this.data,
   });

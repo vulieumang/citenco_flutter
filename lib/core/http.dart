@@ -589,11 +589,18 @@ class Http with DataMix {
           result.error = _json;
           var info = await PackageInfo.fromPlatform();
           var currentVersion = "${info.version}_${info.buildNumber}";
-          MessageDialog.show(
-            state!,
-            "Lỗi api ${result.statusCode}",
-            "Thông báo",
-          );
+          if (statusCode == 400) {
+            MessageDialog.show(
+              state!,
+              "Không tìm thấy dữ liệu !",
+              "Thông báo",
+            );
+          } else
+            MessageDialog.show(
+              state!,
+              "Lỗi api ${result.statusCode}",
+              "Thông báo",
+            );
         }
         if (statusCode == HttpStatus.unauthorized) {
           if (!PackageManager().requiredLogout && !MyProfile().isGuest) {

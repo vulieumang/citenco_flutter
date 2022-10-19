@@ -150,34 +150,55 @@ class QrFlutterPageState extends BasePage<QrFlutterPage, QrFlutterProvider> {
                           .copyWith(color: Colors.black.withOpacity(.7)),
                       textAlign: TextAlign.center,
                     ),
-                    Container(
-                      height: 250,
-                      width: 250,
-                      child: QRView(
-                        key: provider.qrKey,
-                        onQRViewCreated: provider.onQRViewCreated,
-                        formatsAllowed: [
-                          BarcodeFormat.codabar,
-                          BarcodeFormat.code39,
-                          BarcodeFormat.code93,
-                          BarcodeFormat.code128,
-                          BarcodeFormat.ean8,
-                          BarcodeFormat.ean13,
-                          BarcodeFormat.itf,
-                          BarcodeFormat.rss14,
-                          BarcodeFormat.rssExpanded,
-                          BarcodeFormat.upcA,
-                          BarcodeFormat.upcE,
-                          BarcodeFormat.upcEanExtension,
-                        ],
-                        overlay: QrScannerOverlayShape(
-                          borderColor: Color(0xffE8E1E1),
-                          borderRadius: 30,
-                          borderLength: 130,
-                          borderWidth: 13,
-                          overlayColor: Colors.white,
+                    Column(
+                      children: [
+                        Container(
+                          height: 250,
+                          width: 250,
+                          child: QRView(
+                            key: provider.qrKey,
+                            onQRViewCreated: provider.onQRViewCreated,
+                            formatsAllowed: [
+                              BarcodeFormat.codabar,
+                              BarcodeFormat.code39,
+                              BarcodeFormat.code93,
+                              BarcodeFormat.code128,
+                              BarcodeFormat.ean8,
+                              BarcodeFormat.ean13,
+                              BarcodeFormat.itf,
+                              BarcodeFormat.rss14,
+                              BarcodeFormat.rssExpanded,
+                              BarcodeFormat.upcA,
+                              BarcodeFormat.upcE,
+                              BarcodeFormat.upcEanExtension,
+                            ],
+                            overlay: QrScannerOverlayShape(
+                              borderColor: Color(0xffE8E1E1),
+                              borderRadius: 30,
+                              borderLength: 130,
+                              borderWidth: 13,
+                              overlayColor: Colors.white,
+                            ),
+                          ),
                         ),
-                      ),
+                        Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Consumer<ShowLightNotifier>(
+                                  builder: (context, show, _) {
+                                return GestureDetector(
+                                  onTap: () => provider.onShowLight(),
+                                  child: Container(
+                                      child: Icon(Icons.lightbulb_circle_sharp,
+                                          size: 50,
+                                          color: show.value!
+                                              ? BasePKG().color.primaryColor
+                                              : Colors.grey)),
+                                );
+                              })
+                            ]),
+                      ],
                     ),
                     Column(
                       children: [
@@ -186,6 +207,7 @@ class QrFlutterPageState extends BasePage<QrFlutterPage, QrFlutterProvider> {
                           child: TextFieldCustom(
                             controller: provider.idController,
                             nameField: "Nhập mã",
+                            textInputType: TextInputType.number,
                             onSubmit: (data) {
                               provider.onScanQR();
                             },

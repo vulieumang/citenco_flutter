@@ -18,6 +18,7 @@ class QrFlutterProvider extends BaseProvider<QrFlutterPageState> {
   final GlobalKey _containerKey = GlobalKey();
   final PermissionStatusNotifier _permissionStatus = PermissionStatusNotifier();
   final CountDownNotifier _countDown = CountDownNotifier(60);
+  final ShowLightNotifier _showLightNotifier = ShowLightNotifier();
 
   TextEditingController idController = TextEditingController();
 
@@ -38,12 +39,13 @@ class QrFlutterProvider extends BaseProvider<QrFlutterPageState> {
 
   @override
   List<BaseNotifier> initNotifiers() {
-    return [_permissionStatus, _countDown];
+    return [_permissionStatus, _countDown, _showLightNotifier];
   }
 
   @override
   void dispose() {
     qrViewController?.dispose();
+    idController.dispose();
     super.dispose();
   }
 
@@ -88,14 +90,21 @@ class QrFlutterProvider extends BaseProvider<QrFlutterPageState> {
     }
   }
 
+  onShowLight() {
+    _showLightNotifier.value = !_showLightNotifier.value!;
+    qrViewController!.toggleFlash();
+  }
+
   onScanQR() async {
     showLoading();
+    super.hideKeyboard();
+    qrViewController!.pauseCamera();
     var res;
     if (idController.text.isNotEmpty) {
-      qrViewController!.pauseCamera();
       res = await BasePKG.of(state).scan(id: idController.text);
     }
-    if (res.data.code == 200) {
+
+    if (res != null) if (res.data.code == 200) {
       await Navigator.of(state.context).pushNamed("info_car_page",
           arguments: {"data": res.data.data}).then((value) {
         qrViewController!.resumeCamera();
@@ -105,6 +114,7 @@ class QrFlutterProvider extends BaseProvider<QrFlutterPageState> {
       qrViewController!.resumeCamera();
       _countDown.value = 60;
     }
+    qrViewController!.resumeCamera();
     hideLoading();
   }
 
@@ -140,6 +150,15 @@ class PermissionStatusNotifier extends BaseNotifier<PermissionStatus> {
   ListenableProvider provider() {
     return ChangeNotifierProvider<PermissionStatusNotifier>(
         create: (_) => this);
+  }
+}
+
+class ShowLightNotifier extends BaseNotifier<bool> {
+  ShowLightNotifier() : super(false);
+
+  @override
+  ListenableProvider provider() {
+    return ChangeNotifierProvider<ShowLightNotifier>(create: (_) => this);
   }
 }
 
