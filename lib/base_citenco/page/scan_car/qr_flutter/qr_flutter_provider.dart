@@ -120,7 +120,7 @@ class QrFlutterProvider extends BaseProvider<QrFlutterPageState> {
 
   onQRViewCreated(QRViewController qrViewController) {
     this.qrViewController = qrViewController;
-    qrViewController.scanInvert(true);
+    qrViewController.resumeCamera();
     qrViewController.scannedDataStream.listen((scanData) async {
       if (scanData.code != "") {
         showLoading();

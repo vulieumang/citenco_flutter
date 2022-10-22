@@ -76,7 +76,7 @@ class _TextdileState extends State<TextFieldCustom> {
                       controller: widget.controller,
                       readOnly: widget.enable ?? false,
                       onTap: widget.onTap,
-                      onSubmitted: widget.onSubmit!,
+                      onSubmitted: widget.onSubmit ?? null,
                       style:
                           BasePKG().text!.normalNormal().copyWith(height: 1.2),
                       keyboardType: widget.textInputType ?? TextInputType.text,

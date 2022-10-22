@@ -247,7 +247,6 @@ class TemporaryCarPageState
                 children: [
                   SizedBox(height: 12),
                   InkWell(
-                    onTap: () => provider.onImagePressed(images.value, context),
                     child: Row(
                       children: [
                         Container(
@@ -272,7 +271,9 @@ class TemporaryCarPageState
           (index) => _image(BasePKG().dataOf(() => images?[index]), index))
         ..addAll([
           (BasePKG().listOf(() => images).length < 5)
-              ? _camera(5 - BasePKG().listOf(() => images).length)
+              ? GestureDetector(
+                  onTap: () => provider.onImagePressed(images, context),
+                  child: _camera(5 - BasePKG().listOf(() => images).length))
               : SizedBox()
         ]),
     );
@@ -287,7 +288,6 @@ class TemporaryCarPageState
       value: imageUploaded,
       child: Consumer<ImageUploaded?>(builder: (ctx, item, _) {
         String image = stringOf(() => imageUploaded?.path);
-        bool isNetWork = image.startsWith("http") || image.startsWith("https");
         bool loading = BasePKG().doubleOf(() => item?.percent) > 0 &&
             BasePKG().doubleOf(() => item?.percent) < 1;
 
@@ -302,9 +302,7 @@ class TemporaryCarPageState
                   clipBehavior: Clip.none,
                   alignment: Alignment.topRight,
                   children: [
-                    isNetWork
-                        ? _imageNetwork(image, size, index, radius)
-                        : _imageFile(image, size, index, radius),
+                    _imageFile(image, size, index, radius),
                     _buildRemoveBtn(index)
                   ],
                 ),
@@ -358,8 +356,7 @@ class TemporaryCarPageState
   }
 
   Widget _imageFile(String image, double size, int index, double radius) {
-    return FadeInImage(
-        placeholder: AssetImage("lib/special/modify/asset/image/logo/logo.png"),
+    return Image(
         image: FileImage(File(image)),
         width: BasePKG().convert(size),
         height: BasePKG().convert(size),
