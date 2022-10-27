@@ -25,9 +25,9 @@
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
-	<true/> 
+	<true/>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>your usage description here</string>
+	<string>Sử dụng camera để quét mã QR trên xe</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>io.flutter.embedded_views_preview</key>
@@ -54,18 +54,18 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>citenco</string>
+	<string>Sử dụng vị trí để xác định xe</string>
 	<key>NSContactsUsageDescription</key>
-	<string>citenco</string>
+	<string>Sử dụng liên lạc để xem tài xế</string>
 	<key>NSCalendarsUsageDescription</key>
-	<string>citenco</string>
+	<string>Lịch ra vào trạm</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>citenco</string>
+	<string>Lấy hình chụp QR và hình chụp xe vãng lai</string>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>citenco</string>
+	<string>Lấy hình chụp QR và xe vãng lai</string>
 	<key>NSMotionUsageDescription</key>
-	<string>citenco</string>
+	<string>Kiểm tra chuyển động</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>citenco</string>
+	<string>Nhập bằng giọng nói</string>
 </dict>
 </plist>
