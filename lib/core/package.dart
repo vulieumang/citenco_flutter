@@ -18,7 +18,8 @@ import 'base_core/data_mix.dart';
 abstract class Context {
   Http? http;
   String tag = "";
-  String get baseAPI => 'http://citencoapi.vuweb.vn/';
+  // String get baseAPI => 'http://citencoapi.vuweb.vn/';
+  String get baseAPI => 'http://localhost:3001/';
 }
 
 abstract class Package with DataMix {

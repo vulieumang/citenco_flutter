@@ -4,6 +4,8 @@ import 'package:cnvsoft/base_citenco/model/upload_image_respo.dart';
 import 'package:cnvsoft/base_citenco/page/scan_car/qr_flutter/qr_flutter_page.dart';
 import 'package:cnvsoft/base_citenco/util.dart';
 import 'package:cnvsoft/base_citenco/view/fade_image.dart';
+import 'package:cnvsoft/base_citenco/view/square_button.dart';
+import 'package:cnvsoft/base_citenco/view/text_field.dart';
 import 'package:cnvsoft/core/base_core/base_appbar.dart';
 import 'package:cnvsoft/core/base_core/base_page.dart';
 import 'package:cnvsoft/core/base_core/data_mix.dart';
@@ -42,6 +44,64 @@ class InfoCarPageState extends BasePage<InfoCarPage, InfoCarProvider>
 
   @override
   InfoCarProvider initProvider() => InfoCarProvider(this);
+
+  dialogChangeName() {
+    return Dialog(
+      backgroundColor: Colors.transparent,
+      child: Container(
+        decoration: BoxDecoration(
+            color: BasePKG().color.dialog,
+            borderRadius: BorderRadius.all(Radius.circular(8))),
+        padding: BasePKG().all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 18),
+              child: Text("Bạn muốn thay đổi thông tin tài xế!",
+                  textAlign: TextAlign.center,
+                  style: BasePKG()
+                      .text!
+                      .titleDialog()
+                      .copyWith(fontWeight: FontWeight.bold)),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 18),
+              width: size.width,
+              child: TextFieldCustom(
+                controller: provider.nameController,
+                nameField: "Nhập họ tên tài xế",
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SquareButton(
+                  margin: BasePKG().zero,
+                  padding: BasePKG().symmetric(vertical: 12, horizontal: 42),
+                  text: "Xác nhận",
+                  onTap: () {
+                    if (provider.nameController.text.isNotEmpty) {
+                      provider.state.widget.data!.vehicleDriverName =
+                          provider.nameController.text;
+                      provider.checkOldname();
+                    }
+
+                    Navigator.of(context).pop('OK');
+                  },
+                  radius: 8,
+                  theme: BasePKG().button!.alternativeButton(context,
+                      fontWeight: FontWeight.normal),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget body() {
     if (provider.state.widget.data == null) return Container();
@@ -67,11 +127,51 @@ class InfoCarPageState extends BasePage<InfoCarPage, InfoCarProvider>
             ),
             Row(
               children: [
-                Text(
-                  "Tên tài xế: ${provider.state.widget.data!.vehicleDriverName}",
-                  style: BasePKG().text!.captionLowerNormal(),
-                  textAlign: TextAlign.start,
-                ),
+                Consumer<ChangeNameNotifier>(
+                    builder: (context, show, snapshot) {
+                  return Expanded(
+                    child: Text(
+                      "Tên tài xế: ${provider.state.widget.data!.vehicleDriverName}",
+                      style: BasePKG().text!.captionLowerNormal(),
+                      textAlign: TextAlign.start,
+                    ),
+                  );
+                }),
+                if (provider.state.widget.data!.actionType == 1)
+                  Container(
+                    child: Row(
+                      children: [
+                        Consumer<RefreshNameNotifier>(
+                            builder: (context, show, snapshot) {
+                          return Visibility(
+                            visible: !show.value!,
+                            child: GestureDetector(
+                              onTap: () {
+                                provider.refreshName();
+                              },
+                              child: Icon(
+                                Icons.refresh,
+                                size: 24,
+                                color: Colors.black,
+                              ),
+                            ),
+                          );
+                        }),
+                        GestureDetector(
+                          onTap: () async {
+                            await showDialog(
+                                builder: (context) => dialogChangeName(),
+                                context: context);
+                          },
+                          child: Icon(
+                            Icons.edit,
+                            size: 24,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
               ],
             ),
             SizedBox(
@@ -160,22 +260,57 @@ class InfoCarPageState extends BasePage<InfoCarPage, InfoCarProvider>
             SizedBox(
               height: 16,
             ),
+            if (provider.state.widget.data!.pendingHistoryId != null)
+              Consumer<ChangeNameNotifier>(builder: (context, show, snapshot) {
+                return Visibility(
+                  visible: show.value!,
+                  child: Container(
+                    padding: EdgeInsets.only(bottom: 16),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: provider.submitOut,
+                          child: Container(
+                            width: MediaQuery.of(context).size.width - 80,
+                            height: 70,
+                            decoration: BoxDecoration(
+                                color: Colors.green,
+                                borderRadius: BorderRadius.circular(10)),
+                            alignment: Alignment.center,
+                            child: Container(
+                              padding: EdgeInsets.symmetric(vertical: 5),
+                              child: Text("Xác nhận xe ra",
+                                  style: BasePKG()
+                                      .text!
+                                      .captionBold()
+                                      .copyWith(color: Colors.white)),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (StorageCNV()
                         .containsKey("AddVehicleHistoryOverLimitation") &&
-                    StorageCNV().getInt("AddVehicleHistoryOverLimitation") ==
+                    StorageCNV().getInt("AddVehicleHistoryOverLimitation")! >=
                         3 &&
-                    provider.state.widget.data!.count ==
-                        provider.state.widget.data!.dailyLimit) ...[
+                    provider.state.widget.data!.count! >=
+                        provider.state.widget.data!.dailyLimit!) ...[
                   GestureDetector(
                     onTap: provider.submitSend,
                     child: Container(
-                      width: 330,
+                      width: MediaQuery.of(context).size.width - 80,
+                      height: 70,
                       decoration: BoxDecoration(
-                          color: Color(0xff0474C4),
+                          color: BasePKG().color.primaryColor,
                           borderRadius: BorderRadius.circular(10)),
                       alignment: Alignment.center,
                       child: Container(
@@ -195,14 +330,15 @@ class InfoCarPageState extends BasePage<InfoCarPage, InfoCarProvider>
                   GestureDetector(
                     onTap: provider.submitSend,
                     child: Container(
-                      width: 200,
+                      width: MediaQuery.of(context).size.width - 80,
+                      height: 70,
                       decoration: BoxDecoration(
                           color: BasePKG().color.primaryColor,
                           borderRadius: BorderRadius.circular(10)),
                       alignment: Alignment.center,
                       child: Container(
                         padding: EdgeInsets.symmetric(vertical: 5),
-                        child: Text("Xác nhận",
+                        child: Text("Xác nhận xe vào",
                             style: BasePKG()
                                 .text!
                                 .captionBold()

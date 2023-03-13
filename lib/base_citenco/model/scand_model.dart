@@ -51,22 +51,23 @@ class DataScanData {
 }
 
 class DataData {
-  DataData({
-    this.vehicleId,
-    this.vehicleType,
-    this.vehicleLicensePlate,
-    this.vehicleDriverName,
-    this.vehicleVerifiedBy,
-    this.vehicleCitencoId,
-    this.vehicleLoad,
-    this.dailyLimit,
-    this.vehicleCollectionUnitId,
-    this.vehicleCollectionUnitName,
-    this.stationId,
-    this.stationName,
-    this.count,
-    this.images,
-  });
+  DataData(
+      {this.vehicleId,
+      this.vehicleType,
+      this.vehicleLicensePlate,
+      this.vehicleDriverName,
+      this.vehicleVerifiedBy,
+      this.vehicleCitencoId,
+      this.vehicleLoad,
+      this.dailyLimit,
+      this.vehicleCollectionUnitId,
+      this.vehicleCollectionUnitName,
+      this.stationId,
+      this.stationName,
+      this.count,
+      this.images,
+      this.actionType,
+      this.pendingHistoryId});
 
   int? vehicleId;
   String? vehicleType;
@@ -74,6 +75,7 @@ class DataData {
   String? vehicleDriverName;
   String? vehicleVerifiedBy;
   String? vehicleCitencoId;
+  String? pendingHistoryId;
   int? vehicleLoad;
   int? dailyLimit;
   int? vehicleCollectionUnitId;
@@ -81,6 +83,7 @@ class DataData {
   int? stationId;
   String? stationName;
   int? count;
+  int? actionType;
   List<ImageScan>? images;
 
   factory DataData.fromJson(Map<String, dynamic> json) => DataData(
@@ -106,8 +109,11 @@ class DataData {
             ? null
             : json["vehicleCollectionUnitName"],
         stationId: json["stationId"] == null ? null : json["stationId"],
+        actionType: json["actionType"] == null ? null : json["actionType"],
         stationName: json["stationName"] == null ? null : json["stationName"],
         count: json["count"] == null ? null : json["count"],
+        pendingHistoryId:
+            json["pendingHistoryId"] == null ? null : json["pendingHistoryId"],
         images: json["images"] == null
             ? null
             : List<ImageScan>.from(
@@ -132,7 +138,9 @@ class DataData {
             ? null
             : vehicleCollectionUnitName,
         "stationId": stationId == null ? null : stationId,
+        "actionType": actionType == null ? null : actionType,
         "stationName": stationName == null ? null : stationName,
+        "pendingHistoryId": pendingHistoryId == null ? null : pendingHistoryId,
         "count": count == null ? null : count,
         "images": images == null
             ? null

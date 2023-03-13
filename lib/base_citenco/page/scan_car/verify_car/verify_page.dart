@@ -1,4 +1,5 @@
 import 'package:cnvsoft/base_citenco/package/package.dart';
+import 'package:cnvsoft/base_citenco/view/square_button.dart';
 import 'package:cnvsoft/core/base_core/base_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,8 +10,9 @@ import 'verify_provider.dart';
 class VerifyCarPage extends StatefulWidget {
   VerifyCarPage({
     Key? key,
+    this.isOut = false,
   }) : super(key: key);
-
+  bool isOut;
   @override
   VerifyCarPageState createState() => VerifyCarPageState();
 }
@@ -44,6 +46,7 @@ class VerifyCarPageState extends BasePage<VerifyCarPage, VerifyCarProvider> {
     return Container(color: Colors.white);
   }
 
+
   @override
   Widget body() {
     return Container(
@@ -65,7 +68,9 @@ class VerifyCarPageState extends BasePage<VerifyCarPage, VerifyCarProvider> {
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 20),
                     child: Text(
-                      "Xác nhận xe vô thành công",
+                      provider.state.widget.isOut
+                          ? "Xác nhận xe đi ra thành công"
+                          : "Xác nhận xe vô thành công",
                       style: BasePKG()
                           .text!
                           .captionMedium()

@@ -105,7 +105,9 @@ class BasePKG extends BasePackage {
       "scan_car": (arg) => QrFlutterPage(),
       "temporary_car": (arg) => TemporaryCarPage(),
       "login_page": (arg) => LoginPage(),
-      "verify_car_page": (arg) => VerifyCarPage(),
+      "verify_car_page": (arg) => VerifyCarPage(
+            isOut: arg == null ? false : arg['isOut'],
+          ),
       "verify_car_register_page": (arg) => VerifyCarRegisterPage(),
       "info_car_page": (arg) => InfoCarPage(
             data: arg["data"],
@@ -129,6 +131,8 @@ class BaseContext extends Context with DataMix {
   static const String HISTORIS = "api/v1/histories";
   static const String SCAN = "api/v1/vehicles/";
   static const String SCAN_VERIFY = "api/v1/histories";
+  static const String outStationDateTime =
+      "api/v1/histories/outStationDateTime";
 
   Timer? debounceMap;
 
@@ -173,15 +177,29 @@ class BaseContext extends Context with DataMix {
     );
   }
 
-  scanVerify({int? id}) {
+  scanVerify({int? id, String? name}) {
     return http!.post<BaseDataModel>(
       SCAN_VERIFY,
       baseAPI: baseAPI,
       body: {
         "vehicleId": id,
         "vehicleInStationAt": DateTime.now().toUtc().toString(),
+        "vehicleDriverName": name,
         "note": "",
         "images": []
+      },
+    );
+  }
+
+  putOut({
+    String? historyId,
+  }) {
+    return http!.put<BaseDataModel>(
+      outStationDateTime,
+      baseAPI: baseAPI,
+      body: {
+        "historyId": historyId,
+        "vehicleOutStationAt": DateTime.now().toUtc().toString(),
       },
     );
   }
