@@ -40,12 +40,24 @@ class InfoCarProvider extends BaseProvider<InfoCarPageState> {
     }
     _changeShowVerifyVehicleNotifier.value =
         state.widget.data!.pendingHistoryId == null ? true : false;
-    nameVehicle = state.widget.data!.vehicleDriverName!;
-    nameController.text = state.widget.data!.vehicleDriverName!;
+    nameVehicle =
+        BasePKG().stringOf(() => state.widget.data!.vehicleDriverName!);
+    nameController.text =
+        BasePKG().stringOf(() => state.widget.data!.vehicleDriverName!);
   }
 
   submitSend() async {
     showLoading();
+    // if (state.widget.data!.vehicleDriverName == null) {
+    //   await MessageDialog.show(
+    //     state,
+    //     "Vui lòng nhập tên tài xế",
+    //     "Thông báo",
+    //   );
+    //   hideLoading();
+    //   state.dialogChangeName();
+    //   return;
+    // }
     var res = await BasePKG.of(state).scanVerify(
         id: state.widget.data!.vehicleId,
         name: BasePKG().stringOf(() => state.widget.data?.vehicleDriverName));
