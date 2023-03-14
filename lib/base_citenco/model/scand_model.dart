@@ -125,8 +125,7 @@ class DataData {
         "vehicleType": vehicleType == null ? null : vehicleType,
         "vehicleLicensePlate":
             vehicleLicensePlate == null ? null : vehicleLicensePlate,
-        "vehicleDriverName":
-            vehicleDriverName == null ? null : vehicleDriverName,
+        "vehicleDriverName": vehicleDriverName == null ? "" : vehicleDriverName,
         "vehicleVerifiedBy":
             vehicleVerifiedBy == null ? null : vehicleVerifiedBy,
         "vehicleCitencoId": vehicleCitencoId == null ? null : vehicleCitencoId,

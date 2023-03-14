@@ -12,6 +12,7 @@ import 'package:cnvsoft/core/base_core/data_mix.dart';
 import 'package:cnvsoft/base_citenco/package/package.dart';
 import 'package:cnvsoft/base_citenco/package/scope.dart';
 import 'package:cnvsoft/core/storage.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:package_info/package_info.dart';
@@ -139,38 +140,44 @@ class InfoCarPageState extends BasePage<InfoCarPage, InfoCarProvider>
                 }),
                 if (provider.state.widget.data!.actionType == 1)
                   Container(
-                    child: Row(
-                      children: [
-                        Consumer<RefreshNameNotifier>(
-                            builder: (context, show, snapshot) {
-                          return Visibility(
-                            visible: !show.value!,
-                            child: GestureDetector(
-                              onTap: () {
-                                provider.refreshName();
+                    child: Consumer<ChangeShowVerifyVehicleNotifier>(
+                        builder: (context, change, snapshot) {
+                      return Visibility(
+                        visible: change.value!,
+                        child: Row(
+                          children: [
+                            Consumer<RefreshNameNotifier>(
+                                builder: (context, show, snapshot) {
+                              return Visibility(
+                                visible: !show.value!,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    provider.refreshName();
+                                  },
+                                  child: Icon(
+                                    Icons.refresh,
+                                    size: 24,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              );
+                            }),
+                            GestureDetector(
+                              onTap: () async {
+                                await showDialog(
+                                    builder: (context) => dialogChangeName(),
+                                    context: context);
                               },
                               child: Icon(
-                                Icons.refresh,
+                                Icons.edit,
                                 size: 24,
                                 color: Colors.black,
                               ),
                             ),
-                          );
-                        }),
-                        GestureDetector(
-                          onTap: () async {
-                            await showDialog(
-                                builder: (context) => dialogChangeName(),
-                                context: context);
-                          },
-                          child: Icon(
-                            Icons.edit,
-                            size: 24,
-                            color: Colors.black,
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
+                      );
+                    }),
                   )
               ],
             ),
@@ -261,9 +268,10 @@ class InfoCarPageState extends BasePage<InfoCarPage, InfoCarProvider>
               height: 16,
             ),
             if (provider.state.widget.data!.pendingHistoryId != null)
-              Consumer<ChangeNameNotifier>(builder: (context, show, snapshot) {
+              Consumer2<ChangeNameNotifier, ChangeShowVerifyVehicleNotifier>(
+                  builder: (context, show, changeVerify, snapshot) {
                 return Visibility(
-                  visible: show.value!,
+                  visible: show.value! && !changeVerify.value!,
                   child: Container(
                     padding: EdgeInsets.only(bottom: 16),
                     child: Row(
@@ -294,60 +302,99 @@ class InfoCarPageState extends BasePage<InfoCarPage, InfoCarProvider>
                   ),
                 );
               }),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (StorageCNV()
-                        .containsKey("AddVehicleHistoryOverLimitation") &&
-                    StorageCNV().getInt("AddVehicleHistoryOverLimitation")! >=
-                        3 &&
-                    provider.state.widget.data!.count! >=
-                        provider.state.widget.data!.dailyLimit!) ...[
-                  GestureDetector(
-                    onTap: provider.submitSend,
+            Consumer<ChangeShowVerifyVehicleNotifier>(
+                builder: (context, changeVerify, snapshot) {
+              return Column(
+                children: [
+                  Visibility(
+                    visible: changeVerify.value!,
                     child: Container(
-                      width: MediaQuery.of(context).size.width - 80,
-                      height: 70,
-                      decoration: BoxDecoration(
-                          color: BasePKG().color.primaryColor,
-                          borderRadius: BorderRadius.circular(10)),
-                      alignment: Alignment.center,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 5),
-                        child: Text(
-                          "Xác nhận cho vô quá số lần quy định",
-                          style: BasePKG()
-                              .text!
-                              .captionBold()
-                              .copyWith(color: Colors.white),
-                          textAlign: TextAlign.center,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          if (StorageCNV().containsKey(
+                                  "AddVehicleHistoryOverLimitation") &&
+                              StorageCNV().getInt(
+                                      "AddVehicleHistoryOverLimitation")! >=
+                                  3 &&
+                              provider.state.widget.data!.count! >=
+                                  provider.state.widget.data!.dailyLimit!) ...[
+                            GestureDetector(
+                              onTap: provider.submitSend,
+                              child: Container(
+                                width: MediaQuery.of(context).size.width - 80,
+                                height: 70,
+                                decoration: BoxDecoration(
+                                    color: BasePKG().color.primaryColor,
+                                    borderRadius: BorderRadius.circular(10)),
+                                alignment: Alignment.center,
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(vertical: 5),
+                                  child: Text(
+                                    "Xác nhận cho vô quá số lần quy định",
+                                    style: BasePKG()
+                                        .text!
+                                        .captionBold()
+                                        .copyWith(color: Colors.white),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ] else
+                            GestureDetector(
+                              onTap: provider.submitSend,
+                              child: Container(
+                                width: MediaQuery.of(context).size.width - 80,
+                                height: 70,
+                                decoration: BoxDecoration(
+                                    color: BasePKG().color.primaryColor,
+                                    borderRadius: BorderRadius.circular(10)),
+                                alignment: Alignment.center,
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(vertical: 5),
+                                  child: Text("Xác nhận xe vào",
+                                      style: BasePKG()
+                                          .text!
+                                          .captionBold()
+                                          .copyWith(color: Colors.white)),
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible: !changeVerify.value!,
+                    child: Center(
+                      child: RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                          text: 'Nếu bạn cho phép xe vào vào trạm bấm \n',
+                          style: BasePKG().text!.normalLowerNormal(),
+                          children: <TextSpan>[
+                            TextSpan(
+                                text: 'vào đây',
+                                style: BasePKG()
+                                    .text!
+                                    .normalLowerNormal()
+                                    .copyWith(
+                                      decoration: TextDecoration.underline,
+                                    ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    provider.changeShowVerifyVehicle();
+                                  }),
+                          ],
                         ),
                       ),
                     ),
                   ),
-                ] else
-                  GestureDetector(
-                    onTap: provider.submitSend,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width - 80,
-                      height: 70,
-                      decoration: BoxDecoration(
-                          color: BasePKG().color.primaryColor,
-                          borderRadius: BorderRadius.circular(10)),
-                      alignment: Alignment.center,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 5),
-                        child: Text("Xác nhận xe vào",
-                            style: BasePKG()
-                                .text!
-                                .captionBold()
-                                .copyWith(color: Colors.white)),
-                      ),
-                    ),
-                  ),
-              ],
-            ),
+                ],
+              );
+            }),
             SizedBox(
               height: 80,
             )

@@ -184,7 +184,7 @@ class BaseContext extends Context with DataMix {
       body: {
         "vehicleId": id,
         "vehicleInStationAt": DateTime.now().toUtc().toString(),
-        "vehicleDriverName": name,
+        "vehicleDriverName": stringOf(() => name  ),
         "note": "",
         "images": []
       },

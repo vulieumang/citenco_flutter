@@ -15,9 +15,16 @@ class InfoCarProvider extends BaseProvider<InfoCarPageState> {
   final OnCheckNotifier _onCheckNotifier = OnCheckNotifier();
   ChangeNameNotifier _changeNameNotifier = ChangeNameNotifier();
   RefreshNameNotifier _refreshNameNotifier = RefreshNameNotifier();
+  ChangeShowVerifyVehicleNotifier _changeShowVerifyVehicleNotifier =
+      ChangeShowVerifyVehicleNotifier();
   @override
-  List<BaseNotifier> initNotifiers() =>
-      [_openScan, _onCheckNotifier, _changeNameNotifier, _refreshNameNotifier];
+  List<BaseNotifier> initNotifiers() => [
+        _openScan,
+        _onCheckNotifier,
+        _changeNameNotifier,
+        _refreshNameNotifier,
+        _changeShowVerifyVehicleNotifier
+      ];
 
   TextEditingController nameController = TextEditingController();
   String nameVehicle = "";
@@ -31,14 +38,17 @@ class InfoCarProvider extends BaseProvider<InfoCarPageState> {
         "Thông báo",
       );
     }
+    _changeShowVerifyVehicleNotifier.value =
+        state.widget.data!.pendingHistoryId == null ? true : false;
     nameVehicle = state.widget.data!.vehicleDriverName!;
     nameController.text = state.widget.data!.vehicleDriverName!;
   }
 
   submitSend() async {
     showLoading();
-    var res = await BasePKG.of(state)
-        .scanVerify(id: state.widget.data!.vehicleId, name: nameVehicle);
+    var res = await BasePKG.of(state).scanVerify(
+        id: state.widget.data!.vehicleId,
+        name: BasePKG().stringOf(() => state.widget.data?.vehicleDriverName));
     if (res.data["code"] == 200) {
       Navigator.pushNamed(state.context, "verify_car_page");
     } else {
@@ -65,6 +75,11 @@ class InfoCarProvider extends BaseProvider<InfoCarPageState> {
     nameController.text = state.widget.data!.vehicleDriverName!;
     _refreshNameNotifier.value = true;
     _changeNameNotifier.value = true;
+  }
+
+  changeShowVerifyVehicle() {
+    _changeShowVerifyVehicleNotifier.value =
+        !_changeShowVerifyVehicleNotifier.value!;
   }
 
   submitOut() async {
@@ -114,6 +129,16 @@ class RefreshNameNotifier extends BaseNotifier<bool> {
   @override
   ListenableProvider provider() {
     return ChangeNotifierProvider<RefreshNameNotifier>(create: (_) => this);
+  }
+}
+
+class ChangeShowVerifyVehicleNotifier extends BaseNotifier<bool> {
+  ChangeShowVerifyVehicleNotifier() : super(true);
+
+  @override
+  ListenableProvider provider() {
+    return ChangeNotifierProvider<ChangeShowVerifyVehicleNotifier>(
+        create: (_) => this);
   }
 }
 
